@@ -1,0 +1,24 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.APR"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+	<StackPanel>
+		<TextBox Text="Surgical Type" Focusable="False"/>
+		<Grid Background="#FF1B2E37">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock Text="Age Group" HorizontalAlignment="Right" Margin="10,0"/>
+			<ComboBox Grid.Column="1" Margin="0,10,20,10" HorizontalAlignment="Left" MinWidth="260"/>
+		</Grid>
+	</StackPanel>
+</UserControl>

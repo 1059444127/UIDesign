@@ -1,0 +1,505 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Monitor"
+        mc:Ignorable="d"
+        x:Class="Monitor.MainWindow"
+        Title="MainWindow" Height="700" Width="1000" ResizeMode="CanResizeWithGrip" Style="{StaticResource WindowStyle}">
+	<Window.Resources>
+        <DataTemplate x:Key="ListCheckBoxTemplate">
+			<Border x:Name="border">
+				<CheckBox Content="{TemplateBinding Content}" Focusable="False" IsHitTestVisible="False" IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsSelected}"/>
+			</Border>
+		</DataTemplate>
+		<DataTemplate x:Key="DataTemplate1">
+        	<Border>
+        		<ListBox ItemsSource="{Binding Collection}" Grid.IsSharedSizeScope="True" ScrollViewer.CanContentScroll="False">
+        			<ListBox.Template>
+        				<ControlTemplate>
+        					<Border x:Name="Bd" SnapsToDevicePixels="true" Focusable="False" Background="#17272f">
+        						<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Focusable="False"/>
+        					</Border>
+        				</ControlTemplate>
+        			</ListBox.Template>
+					<ListBox.ItemContainerStyle>
+        				<Style TargetType="{x:Type ListBoxItem}">
+							<Setter Property="Height" Value="{Binding RowHeight, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}"/>
+        					<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        					<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        					<Setter Property="Padding" Value="0"/>
+							<Setter Property="Margin" Value="0,0,0,1"/>
+        					<Setter Property="BorderBrush" Value="{StaticResource white10_Color}"/>
+        					<Setter Property="BorderThickness" Value="0,0,0,1"/>
+        					<Setter Property="Template">
+        						<Setter.Value>
+        							<ControlTemplate TargetType="{x:Type ListBoxItem}">
+        								<Grid>
+											<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+        										<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+        									</Border>
+											<Border x:Name="SelectedBD" BorderThickness="2" BorderBrush="#00CBFE" Visibility="Hidden"/>
+										</Grid>
+        								<ControlTemplate.Triggers>
+        									<Trigger Property="IsMouseOver" Value="True">
+												<Setter Property="Background" Value="{StaticResource black10_Color}"/>
+											</Trigger>
+											<Trigger Property="IsSelected" Value="True">
+												<Setter Property="Visibility" TargetName="SelectedBD" Value="Visible"/>
+											</Trigger>
+        									<MultiTrigger>
+        										<MultiTrigger.Conditions>
+        											<Condition Property="IsSelected" Value="true"/>
+        											<Condition Property="Selector.IsSelectionActive" Value="false"/>
+        										</MultiTrigger.Conditions>
+        										<Setter Property="Foreground" Value="white"/>
+        									</MultiTrigger>
+        									<Trigger Property="IsEnabled" Value="false">
+        										<Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+												<Setter Property="Opacity" Value="0.5"/>
+        									</Trigger>
+        								</ControlTemplate.Triggers>
+        							</ControlTemplate>
+        						</Setter.Value>
+        					</Setter>
+        				</Style>
+        			</ListBox.ItemContainerStyle>
+        			<ListBox.ItemTemplate>
+        				<DataTemplate>
+        					<Grid HorizontalAlignment="Left">
+        						<Grid.ColumnDefinitions>
+        							<ColumnDefinition Width="auto"/>
+        							<ColumnDefinition Width="auto"/>
+        							<ColumnDefinition/>
+        						</Grid.ColumnDefinitions>
+        						<Border Grid.Column="{Binding DisplayIndex, ElementName=DataName}" Width="{Binding ActualWidth, ElementName=DataName}"><TextBlock Text="{Binding name}" Margin="16,0,10,0"/></Border>
+        						<Border Grid.Column="{Binding DisplayIndex, ElementName=DataToggle}" Width="{Binding ActualWidth, ElementName=DataToggle}"><CheckBox IsChecked="{Binding toggle}" Margin="16,0,10,0"/></Border>
+        					</Grid>
+        				</DataTemplate>
+        			</ListBox.ItemTemplate>
+        		</ListBox>
+        	</Border>
+        </DataTemplate>
+        <DataTemplate x:Key="ListTreeDataTemplate">
+        	<Border Padding="10">
+        		<Grid>
+        			<Grid.RowDefinitions>
+        				<RowDefinition Height="auto"/>
+        				<RowDefinition Height="17"/>
+        				<RowDefinition Height="17"/>
+        			</Grid.RowDefinitions>
+        			<Grid.ColumnDefinitions>
+        				<ColumnDefinition Width="auto"/>
+        				<ColumnDefinition Width="*"/>
+        			</Grid.ColumnDefinitions>
+        			<Image Margin="0,10,10,10"/>
+        			<Grid Grid.Column="1">
+        				<Grid.ColumnDefinitions>
+        					<ColumnDefinition/>
+        					<ColumnDefinition Width="auto"/>
+        				</Grid.ColumnDefinitions>
+        				<TextBlock Text="Eva Green" Style="{StaticResource H2}"/>
+        				<TextBlock Text="23" Style="{StaticResource H2}" Grid.Column="2"/>
+        			</Grid>
+        			<TextBlock Text="102436579456" Style="{StaticResource Sub}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"/>
+        			<Grid Grid.Column="1" Grid.Row="2">
+        				<Grid.ColumnDefinitions>
+        					<ColumnDefinition/>
+        					<ColumnDefinition Width="auto"/>
+        				</Grid.ColumnDefinitions>
+        				<TextBlock Text="2016.1.15" Style="{StaticResource Sub}"/>
+        				<StackPanel Grid.Column="1" Orientation="Horizontal">
+        					<Button BorderThickness="0" Height="16" Width="16"/>
+        					<Button BorderThickness="0" Height="16" Width="16"/>
+        				</StackPanel>
+        			</Grid>
+        		</Grid>
+        	</Border>
+		</DataTemplate>
+		<DataTemplate x:Key="ListSubTreeDataTemplate">
+			<Border>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="80"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<TextBlock Text="23" Style="{StaticResource FontSub}"/>
+					<TextBlock Text="Eva Green" Style="{StaticResource Content}" Grid.Column="1"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+		<Style x:Key="FileListControl" BasedOn="{StaticResource {x:Type ListBox}}" TargetType="{x:Type ListBox}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="BorderBrush" Value="{StaticResource List_Color}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+    <Grid MouseLeftButtonDown="drag">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock TextWrapping="Wrap" Text="Title" VerticalAlignment="Center" Margin="10,0,0,0"/>
+		<Button HorizontalAlignment="Right" VerticalAlignment="Center" Click="close" BorderThickness="0" Padding="10,0">
+			<Path Data="M0,2 L2,0 8,6 14,0 16,2 10,8 16,14 14,16 8,10 2,16 0,14 6,8 z" Fill="#FFF4F4F5" Stretch="Fill" Width="14" Height="14"/>
+		</Button>
+		<Separator VerticalAlignment="Bottom"/>
+		<Grid x:Name="LayoutRoot" Grid.Row="1" Background="{StaticResource PanelContent}">
+			<!--需要写BG,这是PanelContent的BG,后面就随便了-->
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="40"/>
+			</Grid.RowDefinitions>
+			<TabControl TabStripPlacement="{Binding SelectionBoxItem, ElementName=TabStripPlacement}" Margin="10">
+				<TabItem Header="Public">
+					<UniformGrid Background="#FF162127">
+						<Button Content="Button" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="123"/>
+                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" >
+                            <Button Content="Button" ToolTip="123" ContentTemplate="{StaticResource DataTemplate}" Width="140" Uid="3"/>
+                        </Grid>
+                        <Button Content="Button" VerticalAlignment="Center" HorizontalAlignment="Center" ToolTip="123" Style="{StaticResource HighlightButton}"/>
+						<RepeatButton Content="Button" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0"/>
+						<ToggleButton Content="ToggleButton" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<ToggleButton VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource ToggleButton}" IsChecked="True"/>
+						<RadioButton Content="RadioButton" Style="{StaticResource NoBGRadioButton}"/>
+						<ToggleButton Content="ToggleButton" Style="{StaticResource NoBGToggleButton}"/>
+                        <ComboBox Style="{StaticResource NoBGComboBox}" SelectedIndex="0">
+                            <ComboBoxItem Content="ComboBoxItem"/>
+                            <ComboBoxItem Content="ComboBoxItem"/>
+                            <ComboBoxItem Content="ComboBoxItem"/>
+                        </ComboBox>
+                        <ComboBox Style="{StaticResource DataGridHeaderComboBoxStyle}" SelectedIndex="0">
+                            <ComboBoxItem Content="ComboBoxItem1"/>
+                            <ComboBoxItem Content="ComboBoxItem2"/>
+                            <ComboBoxItem Content="ComboBoxItem3"/>
+                        </ComboBox>
+                        <ToggleButton Content="ToggleButton" Style="{StaticResource UpDownToggleButton}" IsEnabled="False"/>
+						<RadioButton Content="RadioButton" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<RadioButton Content="RadioButton" VerticalAlignment="Center" Style="{StaticResource Button_RadioStyle}" HorizontalAlignment="Center"/>
+						<CheckBox Content="CheckBox" VerticalAlignment="Center" HorizontalAlignment="Center" IsThreeState="True"/>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Padding="0,30,0,0"/>
+							<TextBox TextWrapping="NoWrap" VerticalAlignment="Top" Tag="123" IsReadOnly="True" Text="wr3gaerg">
+								<!--带有ContextMenu的TextBox-->
+								<TextBox.ContextMenu>
+									<ContextMenu>
+										<MenuItem Header="复制1" IsCheckable="True" IsChecked="True" IsEnabled="False" InputGestureText="sdf"/>
+										<MenuItem Command="ApplicationCommands.Copy"/>
+										<MenuItem Header="复制3" IsCheckable="True" InputGestureText="sdf"/>
+										<MenuItem Header="复制">
+											<MenuItem Header="复制"/>
+											<MenuItem Header="选择" InputGestureText="123" IsCheckable="True">
+												<MenuItem Header="复制"/>
+											</MenuItem>
+										</MenuItem>
+										<MenuItem Header="粘贴" InputGestureText="Ctrl+V"/>
+										<Separator/>
+										<MenuItem Header="复制" IsCheckable="False"/>
+									</ContextMenu>
+								</TextBox.ContextMenu>
+							</TextBox>
+						</StackPanel>
+						<RichTextBox>
+							<FlowDocument>
+								<Paragraph><Run Text="RichTextBox RichTextBox RichTextBox RichTextBox RichTextBox RichTextBox"/></Paragraph>
+							</FlowDocument>
+						</RichTextBox>
+						<Label Content="Label" VerticalAlignment="Center"/>
+						<AccessText Text="accesstext"/>
+						<ListBox VerticalAlignment="Top">
+							<TextBlock Text="Text" Style="{StaticResource Content}"/>
+							<TextBlock Text="Text" Style="{StaticResource FontSub}"/>
+							<TextBlock Text="Text" Style="{StaticResource H1}"/>
+							<TextBlock Text="Text" Style="{StaticResource H2}"/>
+							<TextBlock Text="Text" Style="{StaticResource Label}"/>
+							<TextBlock Text="Text" Style="{StaticResource LabelName}"/>
+							<TextBlock Text="Text" Style="{StaticResource Tip}"/>
+							<TextBlock Text="Text" Style="{StaticResource Sub}"/>
+						</ListBox>
+						<TextBox Grid.Column="1" VerticalAlignment="Center" Uid="请输入用户名">
+							<TextBox.Tag>
+								<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+									<TextBlock Text="mm"/>
+									<Image Source="{StaticResource search}" Width="24" Height="24"/>
+                				</Grid>
+							</TextBox.Tag>
+						</TextBox>
+						<PasswordBox x:Name="pw" Password="password"/>
+						<ComboBox>
+							<ComboBoxItem Content="ComboBoxItem"/>
+							<ComboBoxItem Content="ComboBox"/>
+							<Separator Style="{StaticResource Hr}"/>
+							<ComboBoxItem Content="ComboBoxItem"/>
+						</ComboBox>
+						<Grid>
+							<TextBox x:Name="searchText" VerticalAlignment="Center" TextWrapping="NoWrap" Padding="10,0,34,0" Uid="Search" IsReadOnly="True"/>
+							
+							<Button Grid.Column="1" HorizontalAlignment="Right" BorderThickness="0" Width="48">
+								<Border HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="24">
+                					<Image Source="{StaticResource search}"/>
+                				</Border>
+							</Button>
+						</Grid>
+						<TextBox VerticalAlignment="Center" TextWrapping="NoWrap" Padding="10,0,34,0" Tag="Title" IsReadOnly="True"/>
+						<ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource ToolsComboBoxStyle}" SelectedIndex="0">
+							<ComboBoxItem>
+								<Image Source="{StaticResource Male}" Stretch="Fill" Width="46" Height="46"/>
+							</ComboBoxItem>
+							<ComboBoxItem>
+								<Image Source="{StaticResource Male_select}" Stretch="Fill" Width="46" Height="46"/>
+							</ComboBoxItem>
+							<ComboBoxItem>
+								<Image Source="{StaticResource Female}" Stretch="Fill" Width="46" Height="46"/>
+							</ComboBoxItem>
+						</ComboBox>
+						<ComboBox VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource NoBGComboBox}" SelectedIndex="0">
+							<ComboBoxItem Content="RIS"/>
+							<ComboBoxItem Content="LOCAL"/>
+							<Separator/>
+							<ComboBoxItem Content="ComboBoxItem"/>
+						</ComboBox>
+						<ProgressBar Height="20" Value="71"/>
+						<Expander Header="Hide" IsExpanded="True" Foreground="White" VerticalAlignment="Top">
+							<Grid Height="50">
+								<Rectangle Fill="#33ffffff" Height="1" VerticalAlignment="Top"/>
+								<Rectangle Stroke="Black" Width="50">
+									<Rectangle.Fill>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#00000000"/>
+											<GradientStop Color="#4C000000" Offset="1"/>
+										</LinearGradientBrush>
+									</Rectangle.Fill>
+									<Rectangle.ContextMenu>
+										<ContextMenu>
+											<MenuItem Command="ApplicationCommands.Copy"/>
+											<MenuItem Command="ApplicationCommands.Open"/>
+										</ContextMenu>
+									</Rectangle.ContextMenu>
+								</Rectangle>
+							</Grid>
+						</Expander>
+						<GroupBox Header="Title" Margin="0,0,6,0">
+							<StackPanel Orientation="Vertical">
+								<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+								<Separator/>
+							</StackPanel>
+						</GroupBox>
+						<DockPanel>
+							<TextBlock DockPanel.Dock="Top" Text="Separator展示，右侧添加FlowDirection=&quot;RightToLeft&quot;属性改变成竖分割线" TextWrapping="Wrap" Style="{StaticResource FontSub}"/>
+							<Separator/>
+						</DockPanel>
+						<Separator FlowDirection="RightToLeft"/>
+						<DockPanel>
+							<TextBlock Text="GridSplitter展示，背景透明，自定义触控区域" DockPanel.Dock="Top" TextWrapping="Wrap" />
+							<GridSplitter Background="Transparent" HorizontalAlignment="Stretch" Height="10"/>
+
+						</DockPanel>
+
+						<DockPanel>
+							<TextBlock TextWrapping="Wrap" Text="ScrollBar展示" DockPanel.Dock="Top"/>
+							<ScrollBar IsEnabled="{Binding IsChecked, ElementName=ScrollBarEnabled}" DockPanel.Dock="Bottom" Orientation="Horizontal" ViewportSize="6" Maximum="10" Value="6"/>
+							<CheckBox x:Name="ScrollBarEnabled" Content="IsEnabled" IsChecked="True"/>
+							<ScrollBar IsEnabled="{Binding IsChecked, ElementName=ScrollBarEnabled}" DockPanel.Dock="Right" Maximum="100" ViewportSize="100"/>
+						</DockPanel>
+						<Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="24">
+							<Ellipse Height="20" Width="20" VerticalAlignment="Top" HorizontalAlignment="Left" Stroke="Black" StrokeThickness="2"/>
+							<Path Data="M1.5,0 L8,6.5 6.5,8 0,1.5 z" Fill="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+						</Grid>
+					</UniformGrid>
+				</TabItem>
+				<TabItem Header="Color&amp;Type">
+					<UniformGrid Columns="6">
+						<Border BorderBrush="Black" BorderThickness="1" Style="{StaticResource DialogStyle}">
+							<Label Content="PanelStyle" AllowDrop="True"/>
+						</Border>
+						<CheckBox Style="{StaticResource Img_CheckBoxStyle}" IsChecked="True" Width="100" Height="100" VerticalAlignment="Top">
+							<TextBlock TextWrapping="Wrap" Text="SelectImg_CheckBox" VerticalAlignment="Stretch"/>
+						</CheckBox>
+						<RadioButton Style="{StaticResource Img_RadioStyle}" IsChecked="True" Width="100" Height="100" VerticalAlignment="Top">
+							<TextBlock TextWrapping="Wrap" Text="SelectImg_RadioButton" VerticalAlignment="Stretch"/>
+						</RadioButton>
+					</UniformGrid>
+				</TabItem>
+				<TabItem Header="Slider ProgressBar">
+					<StackPanel>
+						<Slider Margin="0,0,0,10" Value="26" VerticalAlignment="Bottom"/>
+						<Grid Margin="0,6">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+							<Slider Value="16" TickPlacement="{Binding SelectionBoxItem, ElementName=TickPlacement}"/>
+							<ComboBox x:Name="TickPlacement" Grid.Column="2">
+								<ComboBoxItem Content="None"/>
+								<ComboBoxItem Content="TopLeft"/>
+								<ComboBoxItem Content="BottomRight"/>
+								<ComboBoxItem Content="Both"/>
+							</ComboBox>
+						</Grid>
+						<Slider x:Name="slider1" Margin="0,0,10,10" Maximum="{Binding Minimum, ElementName=slider2}" Minimum="-50" TickPlacement="Both"/>
+						<Slider x:Name="slider2" Margin="0,0,0,10" Maximum="50" Minimum="{Binding Maximum, ElementName=slider1}" TickPlacement="Both"/>
+						<ProgressBar Margin="0,0,0,10" Value="73"/>
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition/>
+								<ColumnDefinition Width="auto"/>
+								<ColumnDefinition/>
+							</Grid.ColumnDefinitions>
+							<ToolBar FlowDirection="RightToLeft">
+								<ToggleButton Content="ToggleButton1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<ToggleButton Content="ToggleButton2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<ToggleButton Content="ToggleButton3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<ToggleButton Content="ToggleButton4" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								<ToggleButton Content="ToggleButton5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+							</ToolBar>
+
+						</Grid>
+						<StackPanel Orientation="Horizontal">
+							<Slider/>
+							<Slider/>
+						</StackPanel>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="DataGrid">
+					<DockPanel Margin="20,0" Background="#FF494C4D">
+						<TextBox x:Name="DataDisplayIndex" Text="-1" DockPanel.Dock="Top"/>
+						<DataGrid RowDetailsTemplate="{StaticResource DataTemplate1}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn x:Name="DataName" Header="name" CanUserSort="True">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Property1}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn x:Name="DataToggle" Header="toggle" CanUserSort="False">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Property1}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+					</DockPanel>
+				</TabItem>
+				<TabItem Header="TreeView">
+					<StackPanel Orientation="Horizontal">
+						<TreeView>
+							<TreeViewItem Header="TreeViewItem" IsExpanded="True" UseLayoutRounding="True" AllowDrop="True">
+								<TreeViewItem.ContextMenu>
+									<ContextMenu>
+										<MenuItem Header="123"/>
+										<MenuItem Header="abc"/>
+										<MenuItem Header="egf"/>
+									</ContextMenu>
+								</TreeViewItem.ContextMenu>
+								<TreeViewItem Header="TreeViewItem">
+									<TreeViewItem Header="TreeViewItem"/>
+								</TreeViewItem>
+								<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}">
+									<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}"/>
+									<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}"/>
+								</TreeViewItem>
+								<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}">
+									<TreeViewItem.ContextMenu>
+										<ContextMenu>
+											<Menu>
+												<MenuItem Header="12"/>
+												<MenuItem Header="ab"/>
+												<MenuItem Header="dc"/>
+											</Menu>
+										</ContextMenu>
+									</TreeViewItem.ContextMenu>
+								</TreeViewItem>
+								<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}">
+									<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}"/>
+									<TreeViewItem Header="TreeViewItem" HeaderTemplate="{StaticResource TreeIconDataControl}"/>
+								</TreeViewItem>
+								<TreeViewItem Header="TreeViewItem">
+									<TreeViewItem Header="TreeViewItem"/>
+									<TreeViewItem Header="TreeViewItem"/>
+									<TreeViewItem Header="TreeViewItem"/>
+								</TreeViewItem>
+							</TreeViewItem>
+							<TreeViewItem Header="TreeViewItem"/>
+						</TreeView>
+						<TreeView Style="{StaticResource ListTreeStyle}">
+							<TreeViewItem HeaderTemplate="{StaticResource ListTreeDataTemplate}"/>
+							<TreeViewItem HeaderTemplate="{StaticResource ListTreeDataTemplate}" IsExpanded="True">
+								<TreeViewItem HeaderTemplate="{StaticResource ListSubTreeDataTemplate}"/>
+								<TreeViewItem HeaderTemplate="{StaticResource ListSubTreeDataTemplate}"/>
+							</TreeViewItem>
+							<TreeViewItem HeaderTemplate="{StaticResource ListTreeDataTemplate}"/>
+							<TreeViewItem Header="TreeViewItem"/>
+							<TreeViewItem Header="TreeViewItem"/>
+						</TreeView>
+						<Calendar Style="{StaticResource CalendarStyle}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+						<DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0"/>
+						<ItemsControl ItemsSource="{Binding Collection}"/>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="ListBox">
+					<UniformGrid>
+						<StackPanel>
+							<TextBox x:Name="ListUid" Text="more" Tag="Uid"/>
+							<TextBox x:Name="ListTag" Text="0" Tag="Tag"/>
+							<ListBox Style="{StaticResource ListImgStyle}">
+								<ListBoxItem Content="ListBoxItem" ContentTemplate="{StaticResource ListSubTreeDataTemplate}" Uid="{Binding Text, ElementName=ListUid}" Tag="{Binding Text, ElementName=ListTag}"/>
+								<ListBoxItem Content="ListBoxItem" ContentTemplate="{StaticResource ListSubTreeDataTemplate}" Uid="{Binding Text, ElementName=ListUid}" Tag="{Binding Text, ElementName=ListTag}"/>
+								<ListBoxItem Content="ListBoxItem" ContentTemplate="{StaticResource ListSubTreeDataTemplate}" Uid="{Binding Text, ElementName=ListUid}" Tag="{Binding Text, ElementName=ListTag}"/>
+							</ListBox>
+						</StackPanel>
+						<ListBox Style="{StaticResource FileListControl}">
+							<ListBoxItem Content="ListBoxItem" UseLayoutRounding="True" ContentTemplate="{StaticResource ListCheckBoxTemplate}"/>
+							<ListBoxItem Content="ListBoxItem" ContentTemplate="{StaticResource ListCheckBoxTemplate}"/>
+							<ListBoxItem Content="ListBoxItem"/>
+							<ListBoxItem Content="ListBoxItem"/>
+						</ListBox>
+						<ListView HorizontalAlignment="Center" ItemsSource="{Binding Collection}" SelectedIndex="2" AllowDrop="True">
+							<ListView.View>
+								<GridView>
+									<GridViewColumn>
+										<GridViewColumn.CellTemplate>
+											<DataTemplate>
+												<Border>
+													<CheckBox IsChecked="{Binding toggle}"/>
+												</Border>
+											</DataTemplate>
+										</GridViewColumn.CellTemplate>
+										<GridViewColumnHeader>
+											<CheckBox IsThreeState="True" Content="选择"/>
+										</GridViewColumnHeader>
+									</GridViewColumn>
+									<GridViewColumn DisplayMemberBinding="{Binding name}" Header="Property1"/>
+								</GridView>
+							</ListView.View>
+						</ListView>
+					</UniformGrid>
+				</TabItem>
+				<TabItem x:Name="tabItem" IsSelected="{Binding IsChecked, ElementName=menuItem}" Header="Tab">
+					<ContentControl x:Name="LevelContent"/>
+				</TabItem>
+				<TabItem Header="icon">
+					<local:icon HorizontalAlignment="Left" VerticalAlignment="Top"/>
+				</TabItem>
+			</TabControl>
+			<Separator VerticalAlignment="Top" Grid.Row="1"/>
+			<StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right">
+				<Button HorizontalAlignment="Right" Content="Min" IsCancel="True" VerticalAlignment="Center" Margin="0,0,10,0" Click="minWindow"/>
+				<Button HorizontalAlignment="Right" Background="{StaticResource Highlighted}" Content="Max" IsCancel="True" VerticalAlignment="Center" Margin="0,0,10,0" Click="maxWindow"/>
+			</StackPanel>
+		</Grid>
+		<ComboBox x:Name="TabStripPlacement" SelectedIndex="0" HorizontalAlignment="Left" Template="{StaticResource ComboButtonTemplate}" VerticalAlignment="Bottom" Width="40" Height="40" Grid.Row="1">
+			<ComboBoxItem Content="Top"/>
+			<ComboBoxItem Content="Bottom"/>
+			<ComboBoxItem Content="Left"/>
+			<ComboBoxItem Content="Right"/>
+			<ComboBoxItem Content="可控制TabControlHeader所在方向"/>
+		</ComboBox>
+	</Grid>
+</Window>

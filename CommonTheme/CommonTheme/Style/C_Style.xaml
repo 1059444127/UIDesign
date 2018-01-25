@@ -1,0 +1,1056 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+    xmlns:converter="clr-namespace:UIH.XA.CommonTheme.Style">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Path_Color.xaml" />
+        <ResourceDictionary Source="Public.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:LabelDiskLessValueConverter x:Key="LabelDiskLessValueConverter"/>
+    <converter:LabelDiskMoreValueConverter x:Key="LabelDiskMoreValueConverter"/>
+    <converter:LabelDiskPointValueConverter x:Key="LabelDiskPointValueConverter"/>
+    <converter:TemperatureBackgroundHeightValueConverter x:Key="TemperatureBackgroundHeightValueConverter"/>
+
+    <Style x:Key="NoBGComboBox" TargetType="{x:Type ComboBox}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="white"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="Validation.ErrorTemplate" Value="{StaticResource ComboBoxErrorTemplateStyle}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBox}">
+					<Grid x:Name="MainGrid" SnapsToDevicePixels="true" Background="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="17"/>
+						</Grid.ColumnDefinitions>
+						<Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Slide" Effect="{StaticResource PopupEffect}">
+							<Border x:Name="DropDownBorder" BorderThickness="1" CornerRadius="3" Padding="3" Background="#c4d0d7" MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{Binding ActualWidth, ElementName=MainGrid}" Margin="10">
+								<ScrollViewer x:Name="DropDownScrollViewer">
+									<Grid RenderOptions.ClearTypeHint="Enabled" ClipToBounds="True" Margin="0,0,0,-1">
+										<Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+											<Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=DropDownBorder}" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}"/>
+										</Canvas>
+										<ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+									</Grid>
+								</ScrollViewer>
+							</Border>
+						</Popup>
+						<Border  x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"  Grid.ColumnSpan="2" CornerRadius="2">
+							<ToggleButton IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource ComboBoxReadonlyToggleButton}" Foreground="{TemplateBinding Foreground}"/>
+						</Border>
+						<Border VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}">
+							<ContentPresenter ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true"/>
+						<Trigger Property="HasItems" Value="false">
+							<Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+							<Setter Property="Opacity" TargetName="MainGrid" Value="0.7"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+						<Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+							<Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+							<Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsEditable" Value="true">
+				<Setter Property="IsTabStop" Value="false"/>
+				<Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	<Style x:Key="NoBGRadioButton" TargetType="{x:Type RadioButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="#FFAAB5BF"/>
+		<Setter Property="Height" Value="46"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Effect" Value="{StaticResource ButtonEffect}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type RadioButton}">
+					<Border x:Name="BG" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2" Padding="{TemplateBinding Padding}">
+						<ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Uid="{TemplateBinding Uid}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true"/>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" Value="{StaticResource Highlighted}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+							<Setter Property="Opacity" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="NoBGToggleButton" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="#FFAAB5BF"/>
+		<Setter Property="Height" Value="46"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Effect" Value="{StaticResource ButtonEffect}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border x:Name="BG" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2" Padding="{TemplateBinding Padding}">
+						<ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Uid="{TemplateBinding Uid}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true"/>
+						<Trigger Property="IsChecked" Value="true">
+							<Setter Property="Foreground" Value="{StaticResource Highlighted}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+							<Setter Property="Opacity" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="C_ComboToggleButton" TargetType="{x:Type ToggleButton}">
+		<Setter Property="OverridesDefaultStyle" Value="true"/>
+		<Setter Property="IsTabStop" Value="false"/>
+		<Setter Property="ClickMode" Value="Press"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border x:Name="border" Background="Transparent">
+						<Path x:Name="Arrow" Data="M0,7 L7,7 3.5,11 z" Fill="{StaticResource white70_Font}" Stretch="Fill" Height="4" Width="7" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Foreground" Value="White"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="true"/>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" TargetName="border" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Width" Value="15"/>
+		<Setter Property="Height" Value="15"/>
+	</Style>
+	<Style x:Key="ToolsComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
+		<Setter Property="Foreground" Value="#FF17262D"/>
+		<Setter Property="BorderThickness" Value="0,0,0,1"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBoxItem}">
+					<Border x:Name="Bd" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderBrush="{TemplateBinding BorderBrush}">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="Selector.IsSelected" Value="True">
+							<Setter Property="Background" TargetName="Bd" Value="#111a1f"/>
+						</Trigger>
+						<Trigger Property="IsHighlighted" Value="true"/>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" TargetName="Bd" Value="0.4"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="ToolsComboBoxStyle" TargetType="{x:Type ComboBox}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="ItemContainerStyle" Value="{StaticResource ToolsComboBoxItemStyle}"/>
+		<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="VerticalAlignment" Value="Center"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBox}">
+					<Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+						<Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Fade">
+							<Border x:Name="DropDownBorder" Background="#FF1F3540" Margin="10" CornerRadius="3" Padding="0,3" Width="{Binding ActualWidth, ElementName=MainGrid}">
+								<ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+							</Border>
+						</Popup>
+						<Border VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="2">
+							<ContentPresenter ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Border>
+						<Border  x:Name="Bd" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+							<ToggleButton x:Name="OpenButton" BorderBrush="{TemplateBinding BorderBrush}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource C_ComboToggleButton}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Foreground="{TemplateBinding Foreground}"/>
+						</Border>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsFocused" Value="True" SourceName="OpenButton">
+							<Setter Property="Background" Value="#FF111a1f"/>
+						</Trigger>
+						<Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true"/>
+						<Trigger Property="HasItems" Value="false">
+							<Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+							<Setter Property="Opacity" TargetName="MainGrid" Value="0.7"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsEditable" Value="true">
+				<Setter Property="IsTabStop" Value="false"/>
+				<Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	<Style x:Key="Logo_ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}" TargetType="{x:Type ComboBox}">
+		<Setter Property="MinHeight" Value="75"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ComboBox}">
+					<Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+						<Popup x:Name="PART_Popup" AllowsTransparency="true" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" Width="{Binding ActualWidth, ElementName=MainGrid}" PopupAnimation="Slide" HorizontalOffset="20">
+							<Border x:Name="DropDownBorder" BorderThickness="1" Background="#FFBAC5CC" Margin="20" CornerRadius="3" Padding="3">
+									<Grid RenderOptions.ClearTypeHint="Enabled" ClipToBounds="True" Margin="0,0,0,-1">
+										<ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+									</Grid>
+							</Border>
+						</Popup>
+						<ToggleButton Template="{DynamicResource Transparent_ToggleButtonStyle}" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Background="{TemplateBinding Background}" BorderThickness="0" MinHeight="75">
+                            <Path Data="{DynamicResource Logo}" Fill="{DynamicResource white}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						</ToggleButton>
+						<ContentPresenter ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true"/>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+							<Setter Property="Opacity" TargetName="MainGrid" Value="0.7"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Background" Value="#FF0D1316"/>
+	</Style>
+	<Style x:Key="HighlightButton" TargetType="{x:Type Button}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="{StaticResource Highlighted}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource white}"/>
+		<Setter Property="Height" Value="46"/>
+		<Setter Property="Padding" Value="50,0"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+		<Setter Property="Uid" Value="0"/>
+		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<Grid>
+						<Rectangle x:Name="shadow" Fill="#66136799" RadiusX="2" RadiusY="2" Margin="0,2,0,-2"/>
+						<Border x:Name="BG" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2" Padding="{TemplateBinding Padding}">
+							<ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Uid="{TemplateBinding Uid}"/>
+						</Border>
+						<Grid x:Name="Down" Visibility="Hidden">
+							<Rectangle Height="4" VerticalAlignment="Top" RadiusX="2" RadiusY="2">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#66000000" Offset="0"/>
+										<GradientStop Color="#00000000" Offset="0.5"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<Rectangle Height="3" VerticalAlignment="Bottom" RadiusX="2" RadiusY="2">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="#4C000000" Offset="1"/>
+										<GradientStop Color="#00000000" Offset="0.5"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<Rectangle Width="3" HorizontalAlignment="Left" RadiusX="2" RadiusY="2">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+										<GradientStop Color="#4C000000" Offset="1"/>
+										<GradientStop Color="#00000000" Offset="0.5"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+							<Rectangle HorizontalAlignment="Right" Width="3" RadiusX="2" RadiusY="2">
+								<Rectangle.Fill>
+									<LinearGradientBrush EndPoint="0,0" StartPoint="1,0">
+										<GradientStop Color="#33000000" Offset="0"/>
+										<GradientStop Color="#00000000" Offset="0.5"/>
+									</LinearGradientBrush>
+								</Rectangle.Fill>
+							</Rectangle>
+						</Grid>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true"/>
+						<Trigger Property="IsPressed" Value="true">
+							<Setter Property="Background" Value="#41698f"/>
+							<Setter Property="Visibility" TargetName="shadow" Value="Hidden"/>
+							<Setter Property="Visibility" TargetName="Down" Value="Visible"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" Value="0.4"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="UpDownToggleButton" TargetType="{x:Type ToggleButton}">
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="#FFAAB5BF"/>
+		<Setter Property="Height" Value="46"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="FontSize" Value="20"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Effect" Value="{StaticResource ButtonEffect}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border x:Name="BG" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="2" Padding="{TemplateBinding Padding}">
+						<Grid Margin="0,9">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="auto"/>
+							</Grid.ColumnDefinitions>
+							<ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Uid="{TemplateBinding Uid}"/>
+                            <Grid Grid.Column="1" Margin="8,0" Visibility="{Binding Tag, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+								<Grid.RowDefinitions>
+									<RowDefinition/>
+									<RowDefinition/>
+								</Grid.RowDefinitions>
+								<Path x:Name="Up" Data="M4,0 L8,6 0,6 z" Opacity="0.8" Margin="0,0,0,1" VerticalAlignment="Bottom" Fill="{TemplateBinding Foreground}"/>
+								<Path x:Name="Down" Data="M0,0 L8,0 4,6 z" Opacity="0.8" Grid.Row="1" Margin="0,1,0,0" VerticalAlignment="Top" Fill="{TemplateBinding Foreground}"/>
+							</Grid>
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="true">
+							<Setter Property="Foreground" Value="white"/>
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsChecked" Value="True"/>
+								<Condition Property="IsEnabled" Value="True"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Fill" TargetName="Down" Value="{StaticResource Highlighted}"/>
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsChecked" Value="False"/>
+								<Condition Property="IsEnabled" Value="True"/>
+							</MultiTrigger.Conditions>
+							<Setter Property="Fill" TargetName="Up" Value="{StaticResource Highlighted}"/>
+						</MultiTrigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Opacity" TargetName="Up" Value="0.6"/>
+							<Setter Property="Opacity" TargetName="Down" Value="0.6"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="ListTreeToggleButtonStyle" TargetType="{x:Type ToggleButton}">
+		<Setter Property="Focusable" Value="False"/>
+		<Setter Property="Background" Value="#1b2e37"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ToggleButton}">
+					<Border x:Name="Light" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="4">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Background" Value="{StaticResource black20_Color}"/>
+						</Trigger>
+						<Trigger Property="IsChecked" Value="True">
+							<Setter Property="CornerRadius" TargetName="Light" Value="4,4,0,0"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<ControlTemplate x:Key="ListSubTreeItemControlTemplate" TargetType="{x:Type TreeViewItem}">
+		<Grid x:Name="grid" Background="Transparent" SnapsToDevicePixels="True">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition MinHeight="8"/>
+			</Grid.RowDefinitions>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="ExpansionStates">
+                    <VisualState x:Name="Expanded">
+                        <Storyboard>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="ItemsHost">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="-10"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemPanel">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Rectangle x:Name="rectangle" Margin="5,0,5,-6" Fill="#1b2e37" RadiusX="4" RadiusY="4" Effect="{TemplateBinding Effect}"/>
+			<Border x:Name="BG" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4" BorderThickness="{TemplateBinding BorderThickness}" Effect="{TemplateBinding Effect}"/>
+			<ToggleButton x:Name="Expander" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ListTreeToggleButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}" Effect="{TemplateBinding Effect}" Padding="{TemplateBinding Padding}" HorizontalContentAlignment="Left">
+				<ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+			</ToggleButton>
+            <Border x:Name="Bd" SnapsToDevicePixels="true" CornerRadius="4"  Visibility="Collapsed" BorderBrush="#FF8E8E8E">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                        <GradientStop Color="#E518262D" Offset="0.8"/>
+                        <GradientStop Color="#0018262D" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid x:Name="PathBorder" Width="6" HorizontalAlignment="Left" Visibility="Collapsed" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4"/>
+                    </Grid.RowDefinitions>
+                    <Path Fill="{Binding BorderBrush,ElementName=Bd}" Stretch="Fill"  Data="M3.0000007,0 L6.0000014,0 6.0000014,4.000003 0,4.000003 0,3.0000009 C0,1.343146 1.3431457,2.5332076E-07 3.0000007,0 z" />
+                    <Rectangle Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="1"/>
+                    <Path Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="2" Stretch="Fill"  Data="M0,0 L6.0000014,0 6.0000014,4.000003 3.0000007,4.000003 C1.3431457,4.0000016 0,2.6568543 0,1.0000024 z" />
+                </Grid>
+            </Border>
+            <Path x:Name="Pause" Fill="#FFBFC8CF" Stretch="Fill" Width="31" Height="31" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Data="M18,7.5 L20,7.5 C20.276142,7.5 20.5,7.7238574 20.5,8 L20.5,23 C20.5,23.276142 20.276142,23.5 20,23.5 L18,23.5 C17.723858,23.5 17.5,23.276142 17.5,23 L17.5,8 C17.5,7.7238574 17.723858,7.5 18,7.5 z M11,7.5 L13,7.5 C13.276142,7.5 13.5,7.7238574 13.5,8 L13.5,23 C13.5,23.276142 13.276142,23.5 13,23.5 L11,23.5 C10.723858,23.5 10.5,23.276142 10.5,23 L10.5,8 C10.5,7.7238574 10.723858,7.5 11,7.5 z M15.5,1 C7.4918714,1 1,7.4918714 1,15.5 1,23.508129 7.4918714,30 15.5,30 23.508129,30 30,23.508129 30,15.5 30,7.4918714 23.508129,1 15.5,1 z M15.5,0 C24.060413,0 31,6.9395862 31,15.5 31,24.060413 24.060413,31 15.5,31 6.9395862,31 0,24.060413 0,15.5 0,6.9395862 6.9395862,0 15.5,0 z" />
+            <Path x:Name="Check" Width="31" Height="31" Fill="#FFF3970C" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Stretch="Fill" Data="M17.50733,18.593441 L21.52586,25.512768 21.475342,25.542635 C19.862974,26.469763 17.993414,27 16.000008,27 14.006603,27 12.137043,26.469763 10.524675,25.542635 L10.507345,25.532389 14.495202,18.594896 14.570022,18.637917 C14.995102,18.868834 15.482233,19 16,19 16.517767,19 17.004898,18.868834 17.429977,18.637917 z M16,14 C17.10457,14 18,14.895431 18,16 18,17.10457 17.10457,18 16,18 14.895431,18 14,17.10457 14,16 14,14.895431 14.895431,14 16,14 z M10.458068,6.4968495 L14.48965,13.408297 14.44439,13.43432 C13.61968,13.935427 13.055742,14.822969 13.003903,15.845621 L13.000578,15.977146 5.0210891,15.977394 5,15.999776 5.0061765,15.627775 C5.133585,11.796578 7.2201843,8.461565 10.296102,6.5926032 z M21.498224,6.4710002 L21.703915,6.5926032 C24.779833,8.461565 26.866432,11.796578 26.993841,15.627775 L27,15.998765 18.999956,15.998247 18.996096,15.845621 C18.944258,14.822969 18.38032,13.935427 17.555611,13.43432 L17.497135,13.400698 21.478615,6.4972377 z M16,1.032258 C7.7335443,1.032258 1.032258,7.7335443 1.032258,16 1.032258,24.266455 7.7335443,30.967741 16,30.967741 24.266455,30.967741 30.967741,24.266455 30.967741,16 30.967741,7.7335443 24.266455,1.032258 16,1.032258 z M16,0 C24.836555,0 32,7.1634436 32,16 32,24.836555 24.836555,32 16,32 7.1634436,32 0,24.836555 0,16 0,7.1634436 7.1634436,0 16,0 z" />
+            <Border x:Name="ItemPanel" Grid.ColumnSpan="2" Grid.Row="1" CornerRadius="0,0,4,4" Background="#FF17272F" Padding="0,0,0,4">
+				<Border ClipToBounds="True">
+                    <ItemsPresenter x:Name="ItemsHost" Margin="0,0,0,-1" RenderTransformOrigin="0.5,0.5">
+                        <ItemsPresenter.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </ItemsPresenter.RenderTransform>
+                    </ItemsPresenter>
+                </Border>
+			</Border>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsExpanded" Value="false">
+				<Setter Property="Visibility" TargetName="ItemPanel" Value="Collapsed"/>
+			</Trigger>
+			<Trigger Property="HasItems" Value="false">
+				<Setter Property="Visibility" TargetName="ItemPanel" Value="Collapsed"/>
+			</Trigger>
+			<!--<Trigger Property="IsSelected" Value="true">
+				<Setter Property="Background" Value="#FF3E5E70"/>
+			</Trigger>-->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="False"/>
+                    <Condition Property="Tag" Value="pause"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="Pause" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="ItemPanel" Value="Collapsed"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="False"/>
+                    <Condition Property="Tag" Value="check"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFF3970C"/>
+                <Setter Property="Visibility" TargetName="Check" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="ItemPanel" Value="Collapsed"/>
+            </MultiTrigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+	<ControlTemplate x:Key="ListTreeItemControlTemplate" TargetType="{x:Type TreeViewItem}">
+		<Grid x:Name="grid" Background="Transparent" SnapsToDevicePixels="True">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Border x:Name="BG" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4" BorderThickness="{TemplateBinding BorderThickness}"/>
+			<ToggleButton x:Name="Expander" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ListTreeToggleButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}"/>
+			<ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+            <Border x:Name="Bd" SnapsToDevicePixels="true" CornerRadius="4"  Visibility="Collapsed" BorderBrush="#FF8E8E8E">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                        <GradientStop Color="#E518262D" Offset="0.8"/>
+                        <GradientStop Color="#0018262D" Offset="0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid x:Name="PathBorder" Width="6" HorizontalAlignment="Left" Visibility="Collapsed" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4"/>
+                    </Grid.RowDefinitions>
+                    <Path Fill="{Binding BorderBrush,ElementName=Bd}" Stretch="Fill"  Data="M3.0000007,0 L6.0000014,0 6.0000014,4.000003 0,4.000003 0,3.0000009 C0,1.343146 1.3431457,2.5332076E-07 3.0000007,0 z" />
+                    <Rectangle Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="1"/>
+                    <Path Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="2" Stretch="Fill"  Data="M0,0 L6.0000014,0 6.0000014,4.000003 3.0000007,4.000003 C1.3431457,4.0000016 0,2.6568543 0,1.0000024 z" />
+                </Grid>
+            </Border>
+            <Path x:Name="Pause" Fill="#FFBFC8CF" Stretch="Fill" Width="31" Height="31" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Data="M18,7.5 L20,7.5 C20.276142,7.5 20.5,7.7238574 20.5,8 L20.5,23 C20.5,23.276142 20.276142,23.5 20,23.5 L18,23.5 C17.723858,23.5 17.5,23.276142 17.5,23 L17.5,8 C17.5,7.7238574 17.723858,7.5 18,7.5 z M11,7.5 L13,7.5 C13.276142,7.5 13.5,7.7238574 13.5,8 L13.5,23 C13.5,23.276142 13.276142,23.5 13,23.5 L11,23.5 C10.723858,23.5 10.5,23.276142 10.5,23 L10.5,8 C10.5,7.7238574 10.723858,7.5 11,7.5 z M15.5,1 C7.4918714,1 1,7.4918714 1,15.5 1,23.508129 7.4918714,30 15.5,30 23.508129,30 30,23.508129 30,15.5 30,7.4918714 23.508129,1 15.5,1 z M15.5,0 C24.060413,0 31,6.9395862 31,15.5 31,24.060413 24.060413,31 15.5,31 6.9395862,31 0,24.060413 0,15.5 0,6.9395862 6.9395862,0 15.5,0 z" />
+            <Path x:Name="Check" Width="31" Height="31" Fill="#FFF3970C" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Stretch="Fill" Data="M17.50733,18.593441 L21.52586,25.512768 21.475342,25.542635 C19.862974,26.469763 17.993414,27 16.000008,27 14.006603,27 12.137043,26.469763 10.524675,25.542635 L10.507345,25.532389 14.495202,18.594896 14.570022,18.637917 C14.995102,18.868834 15.482233,19 16,19 16.517767,19 17.004898,18.868834 17.429977,18.637917 z M16,14 C17.10457,14 18,14.895431 18,16 18,17.10457 17.10457,18 16,18 14.895431,18 14,17.10457 14,16 14,14.895431 14.895431,14 16,14 z M10.458068,6.4968495 L14.48965,13.408297 14.44439,13.43432 C13.61968,13.935427 13.055742,14.822969 13.003903,15.845621 L13.000578,15.977146 5.0210891,15.977394 5,15.999776 5.0061765,15.627775 C5.133585,11.796578 7.2201843,8.461565 10.296102,6.5926032 z M21.498224,6.4710002 L21.703915,6.5926032 C24.779833,8.461565 26.866432,11.796578 26.993841,15.627775 L27,15.998765 18.999956,15.998247 18.996096,15.845621 C18.944258,14.822969 18.38032,13.935427 17.555611,13.43432 L17.497135,13.400698 21.478615,6.4972377 z M16,1.032258 C7.7335443,1.032258 1.032258,7.7335443 1.032258,16 1.032258,24.266455 7.7335443,30.967741 16,30.967741 24.266455,30.967741 30.967741,24.266455 30.967741,16 30.967741,7.7335443 24.266455,1.032258 16,1.032258 z M16,0 C24.836555,0 32,7.1634436 32,16 32,24.836555 24.836555,32 16,32 7.1634436,32 0,24.836555 0,16 0,7.1634436 7.1634436,0 16,0 z" />
+            <ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Row="1"/>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsExpanded" Value="false">
+				<Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+			</Trigger>
+			<Trigger Property="HasItems" Value="false">
+				<Setter Property="Visibility" TargetName="Expander" Value="Hidden"/>
+			</Trigger>
+			<!--<Trigger Property="IsSelected" Value="true">
+				<Setter Property="Background" Value="#FF3E5E70"/>
+			</Trigger>-->
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <!--<Condition Property="IsEnabled" Value="False"/>-->
+                    <Condition Property="Tag" Value="pause"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="Pause" Value="Visible"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <!--<Condition Property="IsEnabled" Value="False"/>-->
+                    <Condition Property="Tag" Value="check"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFF3970C"/>
+                <Setter Property="Visibility" TargetName="Check" Value="Visible"/>
+            </MultiTrigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+	<Style x:Key="ListSubTreeItemStyle" TargetType="{x:Type TreeViewItem}">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0,0,0,1"/>
+		<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+		<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Padding" Value="6,5"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TreeViewItem}">
+					<Grid x:Name="grid" Background="Transparent" SnapsToDevicePixels="True">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<Border x:Name="BG" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="3,0"/>
+						<ToggleButton x:Name="Expander" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ListTreeToggleButtonStyle}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" MinHeight="{TemplateBinding MinHeight}" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}">
+							
+						</ToggleButton>
+						<ContentPresenter x:Name="PART_Header" ContentSource="Header" HorizontalAlignment="Left" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+						<Border x:Name="Bd" SnapsToDevicePixels="true"  Visibility="Collapsed" BorderBrush="#FF8E8E8E">
+                            <Border.Background>
+                                <LinearGradientBrush EndPoint="0,0.5" StartPoint="1,0.5">
+                                    <GradientStop Color="#E518262D" Offset="0.8"/>
+                                    <GradientStop Color="#0018262D" Offset="0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid x:Name="PathBorder" Width="6" HorizontalAlignment="Left" Visibility="Collapsed" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="4"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="4"/>
+                                </Grid.RowDefinitions>
+                                <Path Fill="{Binding BorderBrush,ElementName=Bd}" Stretch="Fill"  Data="M3.0000007,0 L6.0000014,0 6.0000014,4.000003 0,4.000003 0,3.0000009 C0,1.343146 1.3431457,2.5332076E-07 3.0000007,0 z" />
+                                <Rectangle Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="1"/>
+                                <Path Fill="{Binding BorderBrush,ElementName=Bd}" Grid.Row="2" Stretch="Fill"  Data="M0,0 L6.0000014,0 6.0000014,4.000003 3.0000007,4.000003 C1.3431457,4.0000016 0,2.6568543 0,1.0000024 z" />
+                            </Grid>
+                        </Border>
+
+                        <Path x:Name="Pause" Fill="#FFBFC8CF" Stretch="Fill"  Width="20" Height="20" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Data="M18,7.5 L20,7.5 C20.276142,7.5 20.5,7.7238574 20.5,8 L20.5,23 C20.5,23.276142 20.276142,23.5 20,23.5 L18,23.5 C17.723858,23.5 17.5,23.276142 17.5,23 L17.5,8 C17.5,7.7238574 17.723858,7.5 18,7.5 z M11,7.5 L13,7.5 C13.276142,7.5 13.5,7.7238574 13.5,8 L13.5,23 C13.5,23.276142 13.276142,23.5 13,23.5 L11,23.5 C10.723858,23.5 10.5,23.276142 10.5,23 L10.5,8 C10.5,7.7238574 10.723858,7.5 11,7.5 z M15.5,1 C7.4918714,1 1,7.4918714 1,15.5 1,23.508129 7.4918714,30 15.5,30 23.508129,30 30,23.508129 30,15.5 30,7.4918714 23.508129,1 15.5,1 z M15.5,0 C24.060413,0 31,6.9395862 31,15.5 31,24.060413 24.060413,31 15.5,31 6.9395862,31 0,24.060413 0,15.5 0,6.9395862 6.9395862,0 15.5,0 z" />
+                        <Path x:Name="Check"  Width="20" Height="20" Fill="#FFF3970C" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,8,0,0" Stretch="Fill" Data="M17.50733,18.593441 L21.52586,25.512768 21.475342,25.542635 C19.862974,26.469763 17.993414,27 16.000008,27 14.006603,27 12.137043,26.469763 10.524675,25.542635 L10.507345,25.532389 14.495202,18.594896 14.570022,18.637917 C14.995102,18.868834 15.482233,19 16,19 16.517767,19 17.004898,18.868834 17.429977,18.637917 z M16,14 C17.10457,14 18,14.895431 18,16 18,17.10457 17.10457,18 16,18 14.895431,18 14,17.10457 14,16 14,14.895431 14.895431,14 16,14 z M10.458068,6.4968495 L14.48965,13.408297 14.44439,13.43432 C13.61968,13.935427 13.055742,14.822969 13.003903,15.845621 L13.000578,15.977146 5.0210891,15.977394 5,15.999776 5.0061765,15.627775 C5.133585,11.796578 7.2201843,8.461565 10.296102,6.5926032 z M21.498224,6.4710002 L21.703915,6.5926032 C24.779833,8.461565 26.866432,11.796578 26.993841,15.627775 L27,15.998765 18.999956,15.998247 18.996096,15.845621 C18.944258,14.822969 18.38032,13.935427 17.555611,13.43432 L17.497135,13.400698 21.478615,6.4972377 z M16,1.032258 C7.7335443,1.032258 1.032258,7.7335443 1.032258,16 1.032258,24.266455 7.7335443,30.967741 16,30.967741 24.266455,30.967741 30.967741,24.266455 30.967741,16 30.967741,7.7335443 24.266455,1.032258 16,1.032258 z M16,0 C24.836555,0 32,7.1634436 32,16 32,24.836555 24.836555,32 16,32 7.1634436,32 0,24.836555 0,16 0,7.1634436 7.1634436,0 16,0 z" />
+						<ItemsPresenter x:Name="ItemsHost" Grid.ColumnSpan="2" Grid.Row="1"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsExpanded" Value="false">
+							<Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+						</Trigger>
+						<Trigger Property="HasItems" Value="false">
+							<Setter Property="Visibility" TargetName="ItemsHost" Value="Collapsed"/>
+							<Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>
+						</Trigger>
+						<!--<Trigger Property="IsSelected" Value="true">
+							<Setter Property="Background" Value="#FF3E5E70"/>
+						</Trigger>-->
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <!--<Condition Property="IsEnabled" Value="False"/>-->
+                                <Condition Property="Tag" Value="pause"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="Pause" Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <!--<Condition Property="IsEnabled" Value="False"/>-->
+                                <Condition Property="Tag" Value="check"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="Bd" Value="Visible"/>
+                            <Setter Property="Visibility" TargetName="PathBorder" Value="Visible"/>
+                            <Setter Property="BorderBrush" TargetName="Bd" Value="#FFF3970C"/>
+                            <Setter Property="Visibility" TargetName="Check" Value="Visible"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="BorderBrush" Value="#19FFFFFF"/>
+	</Style>
+    
+	<Style x:Key="ListTreeItemStyle" TargetType="{x:Type TreeViewItem}">
+		<Style.Triggers>
+			<Trigger Property="HasItems" Value="True">
+				<Setter Property="Template" Value="{StaticResource ListSubTreeItemControlTemplate}"/>
+				<Setter Property="ItemContainerStyle" Value="{StaticResource ListSubTreeItemStyle}"/>
+			</Trigger>
+		</Style.Triggers>
+		<Setter Property="Background" Value="#1b2e37"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+		<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+		<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+		<Setter Property="MinHeight" Value="88"/>
+		<Setter Property="Margin" Value="0,0,0,10"/>
+		<Setter Property="Padding" Value="6,0"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Effect" Value="{StaticResource ButtonEffect}"/>
+		<Setter Property="Template" Value="{StaticResource ListTreeItemControlTemplate}"/>
+	</Style>
+	<Style x:Key="ListTreeStyle" TargetType="{x:Type TreeView}">
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="Background" Value="#121d23"/>
+		<Setter Property="BorderBrush" Value="{x:Null}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="Padding" Value="6,0"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ListTreeItemStyle}"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type TreeView}">
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+						<ScrollViewer x:Name="_tv_scrollviewer_" Background="{TemplateBinding Background}" CanContentScroll="false" Focusable="false" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+							<ItemsPresenter/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="false">
+							<Setter Property="Opacity" TargetName="Bd" Value="0.4"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+    <Style x:Key="ImageListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Background" Value="#7F1C2930"/>
+        <Setter Property="Margin" Value="5,5,0,5"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="Height" Value="196"></Setter>
+        <Setter Property="Width" Value="196"></Setter>
+        <Setter Property="Uid" Value="0"></Setter>
+        <Setter Property="Tag" Value="0"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid Background="Transparent">
+                        <Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Uid="{TemplateBinding Uid}" Tag="{TemplateBinding Tag}"/>
+                        </Border>
+                        <Border x:Name="more" Background="#33FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24" Margin="0,1,1,0" Visibility="Hidden">
+                            <Path Data="M0,0 L24,24 0,24 z" Fill="#99F4F4F5" StrokeThickness="0"/>
+                        </Border>
+                        <Border x:Name="Bl" Width="192" Height="192" SnapsToDevicePixels="true" Background="{TemplateBinding Background}"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Yellow" Visibility="Collapsed">
+                         
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Uid" Value="more">
+                            <Setter Property="Visibility" TargetName="more" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#318bc1"/>
+                        </Trigger>
+                        <Trigger Property="Tag" Value="1">
+                            <Setter Property="Visibility" TargetName="Bl" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="BorderBrush" Value="#318bc1"/>
+                        </Trigger>
+                        
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected"  
+                                   Value="true" />
+                                <Condition Property="Uid"   
+                                   Value="0" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters >
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+
+                        
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Opacity" TargetName="Bd" Value="0.5"/>
+                        </Trigger>                      
+                      
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Opacity" TargetName="Bd" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="Red"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ListImgStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Background" Value="#FF142026"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+		<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="SelectionMode" Value="Extended"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ImageListBoxItemStyle}">
+			<!--<Setter.Value>
+				<Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Background" Value="#7F1C2930"/>
+					<Setter Property="Margin" Value="10,10,0,10"/>
+					<Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+					<Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+					<Setter Property="BorderThickness" Value="1"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="AllowDrop" Value="True"/>
+                    <Setter Property="Height" Value="196"></Setter>
+                    <Setter Property="Width" Value="196"></Setter>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ListBoxItem}">
+								<Grid Background="Transparent">
+									<Border x:Name="Bd" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+										<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+									</Border>
+									<Border x:Name="more" Background="#33FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Top" Width="24" Height="24" Margin="0,1,1,0" Visibility="Hidden">
+										<Path Data="M0,0 L24,24 0,24 z" Fill="#99F4F4F5" StrokeThickness="0"/>
+									</Border>
+								</Grid>
+								<ControlTemplate.Triggers>
+									<Trigger Property="Uid" Value="more">
+										<Setter Property="Visibility" TargetName="more" Value="Visible"/>
+									</Trigger>
+									<Trigger Property="IsMouseOver" Value="True"/>
+									<Trigger Property="IsSelected" Value="true">
+										<Setter Property="Foreground" Value="White"/>
+									</Trigger>
+									<Trigger Property="IsEnabled" Value="false">
+										<Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+										<Setter Property="Opacity" TargetName="Bd" Value="0.5"/>
+									</Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Foreground" Value="Red"></Setter>
+                                    </Trigger>
+								</ControlTemplate.Triggers>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>-->
+		</Setter>
+		<Setter Property="VerticalContentAlignment" Value="Center"/>
+		<Setter Property="ItemsPanel">
+			<Setter.Value>
+				<ItemsPanelTemplate>
+					<WrapPanel IsItemsHost="True"/>
+				</ItemsPanelTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<ControlTemplate.Triggers>
+						<!--<Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
+                        </Trigger>-->
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+					<Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+						<ScrollViewer Focusable="false" BorderThickness="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}"/>
+						</ScrollViewer>
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+    <Style x:Key="LabelStyle_Wifi" TargetType="{x:Type Label}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid Width="21.972" Height="16.973" >
+                                <Path x:Name="path0" Fill="#FF444F57" Height="2.501" Margin="9.366,14.473,9.372,-0.001" Stretch="Fill" VerticalAlignment="Top"  Data="M1.6203488,1.0658141E-14 C2.2244102,-5.2708362E-08 2.7784334,0.21423868 3.2105807,0.57087833 L3.2341689,0.59231675 1.6128525,2.5008091 0,0.59825016 0.030116498,0.57087833 C0.46226406,0.21423868 1.0162873,-5.2708362E-08 1.6203488,1.0658141E-14 z" />
+                                <!--Path x:Name="path0" Fill="#FF444F57" Margin="9.699,15,9.712,0" Stretch="Fill" Data="M1.2807502,1.7053026E-13 C1.7639993,-1.9557757E-07 2.2072178,0.1713908 2.5529362,0.45670254 L2.561184,0.46419869 1.2791246,1.9733241 0,0.46448622 0.0085641742,0.45670254 C0.35428238,0.1713908 0.79750097,-1.9557757E-07 1.2807502,1.7053026E-13 z" /-->
+                                <Path x:Name="path1" Fill="#FF444F57" Margin="6.466,10,6.475,3.795" Stretch="Fill"  Data="M4.5135052,0 C6.2048771,2.3841858E-07 7.7561429,0.59986871 8.9661553,1.5984597 L9.0306036,1.6542865 7.736006,3.1781709 7.693969,3.1417577 C6.829675,2.4284778 5.7216284,2.0000002 4.5135052,2.0000005 3.3053825,2.0000002 2.197336,2.4284778 1.3330412,3.1417577 L1.293031,3.1764154 0,1.6511737 0.06085515,1.5984597 C1.2708678,0.59986871 2.8221333,2.3841858E-07 4.5135052,0 z" />
+                                <Path x:Name="path2" Fill="#FF444F57" Margin="3.234,5,3.238,7.605" Stretch="Fill" Data="M7.7460814,0 C10.645576,-3.1664968E-08 13.304889,1.0283459 15.379195,2.7402165 L15.499673,2.844577 14.205077,4.3684606 14.107011,4.283514 C12.378421,2.8569548 10.162328,1.9999998 7.7460814,1.9999998 5.3298359,1.9999998 3.1137424,2.8569548 1.3851528,4.283514 L1.2930303,4.3633122 0,2.8380708 0.11296654,2.7402165 C2.1872745,1.0283459 4.8465862,-3.1664968E-08 7.7460814,0 z" />
+                                <Path x:Name="path3" Fill="#FF444F57" Margin="0,0,0,11.416" Stretch="Fill" Data="M10.980343,0 C15.087961,2.8871E-07 18.85532,1.4568238 21.793922,3.8819736 L21.972233,4.0327433 20.677404,5.556897 20.521736,5.4252708 C17.928852,3.2854326 14.604712,2.0000002 10.980343,1.9999999 7.3559742,2.0000002 4.0318346,3.2854326 1.4389501,5.4252708 L1.2932434,5.5484732 0,4.0229805 0.16676426,3.8819736 C3.1053667,1.4568238 6.8727255,2.8871E-07 10.980343,0 z" />
+                            </Grid>
+                            <ContentPresenter Visibility="Collapsed" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Uid" Value="0">
+                            <Setter Property="Fill" TargetName="path0" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path0" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path1" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path1" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path2" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path2" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path3" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path3" Value="{x:Null}"/>
+                        </Trigger>
+                        <Trigger Property="Uid" Value="1">
+                            <Setter Property="Fill" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path1" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path1" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path2" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path2" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path3" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path3" Value="{x:Null}"/>
+                        </Trigger>
+                        <Trigger Property="Uid" Value="2">
+                            <Setter Property="Fill" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path2" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path2" Value="{x:Null}"/>
+                            <Setter Property="Fill" TargetName="path3" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path3" Value="{x:Null}"/>
+                        </Trigger>
+                        <Trigger Property="Uid" Value="3">
+                            <Setter Property="Fill" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path2" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path2" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path3" Value="#FF444F57"/>
+                            <Setter Property="Stroke" TargetName="path3" Value="{x:Null}"/>
+                        </Trigger>
+                        <Trigger Property="Uid" Value="4">
+                            <Setter Property="Fill" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path0" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path1" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path2" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path2" Value="#FFFFFFFF"/>
+                            <Setter Property="Fill" TargetName="path3" Value="#FFFFFFFF"/>
+                            <Setter Property="Stroke" TargetName="path3" Value="#FFFFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LabelStyle_Disk" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="#FFF4A03C"/>
+        <Setter Property="Background" Value="#FF121B20"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="Uid" Value="80"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Grid>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"   Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        </Border>
+                        <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid x:Name="Path" Height="26" Width="26">
+                                <Ellipse Fill="{TemplateBinding Foreground}" Width="26" Height="26"/>
+                                <Path Stroke="Transparent" Fill="#FF444F57" Uid="{TemplateBinding  Uid}" x:Name="paht" Width="26" Height="26">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure StartPoint="13,13">
+                                                <LineSegment Point="13,0" />
+                                                <ArcSegment Point="{Binding Uid, ElementName=paht,  Converter={StaticResource LabelDiskLessValueConverter}}" Size="13,13" SweepDirection="Clockwise" />
+                                                <LineSegment Point="13,13" />
+                                            </PathFigure>
+                                            <PathFigure StartPoint="13,13">
+                                                <LineSegment Point="{Binding Uid, ElementName=paht,  Converter={StaticResource LabelDiskPointValueConverter}}" />
+                                                <ArcSegment Point="{Binding Uid, ElementName=paht,  Converter={StaticResource LabelDiskMoreValueConverter}}" Size="13,13" SweepDirection="Clockwise" />
+                                                <LineSegment Point="13,13" />
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path x:Name="ellipse_border" Fill="{TemplateBinding Background}" Stretch="Fill" Data="M13,0.99999994 C6.3725829,1 1,6.3725829 0.99999994,13 1,19.627417 6.3725829,25 13,25 19.627417,25 25,19.627417 25,13 25,6.3725829 19.627417,1 13,0.99999994 z M0,0 L26,0 26,26 0,26 z" />
+
+                            </Grid>
+                            <ContentPresenter Visibility="Collapsed"  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="LabelStyle_Temperature" TargetType="{x:Type Label}">
+        <Setter Property="Foreground" Value="#FF3BECAE"/>
+        <Setter Property="Background" Value="#FF121B20"/>
+        <Setter Property="Width" Value="56"/>
+        <Setter Property="Height" Value="56"/>
+        <Setter Property="Uid" Value="80"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MaxHeight" Value="180"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Label}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                        <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"   VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid Margin="0,-6,0,0" Width="16" Height="34" Background="Black" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                <Rectangle x:Name="temperatureBackground" Fill="{TemplateBinding Foreground}" Margin="1" VerticalAlignment="Bottom">
+                                    <Rectangle.Height>
+
+                                        <MultiBinding    Converter="{StaticResource TemperatureBackgroundHeightValueConverter}">
+                                            <Binding Path="Uid" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="MaxHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                            <Binding Path="MinHeight" RelativeSource="{RelativeSource TemplatedParent}"/>
+                                        </MultiBinding>
+
+                                    </Rectangle.Height>
+                                </Rectangle>
+                                <Path x:Name="background" Fill="{TemplateBinding Background}"  Stretch="Fill" Data="M8,0.99999994 C6.3431459,1 5,2.3431454 5,3.9999998 L5,19.674547 4.9652105,19.690277 C2.6190329,20.82078 1,23.221317 0.99999991,26 1,29.865993 4.1340065,33 8,33 11.865994,33 15,29.865993 15,26 15,23.221317 13.380967,20.82078 11.03479,19.690277 L11,19.674547 11,3.9999998 C11,2.3431454 9.6568547,1 8,0.99999994 z M0,0 L16,0 16,34 0,34 z" />
+                                <Path x:Name="temperatureBorder" Fill="#FF444F57"  Stretch="Fill"   Data="M8,0.99999994 C7.9482231,1 7.8967529,1.0013117 7.8456202,1.0039036 7.794488,1.0064955 7.7436929,1.0103676 7.6932674,1.0154884 7.5419908,1.0308516 7.3940363,1.0574541 7.2502532,1.0944476 7.2023254,1.1067792 7.1548615,1.1202651 7.1078921,1.134874 7.0609222,1.1494831 7.0144477,1.1652153 6.9684997,1.182039 6.9225512,1.1988633 6.8771291,1.2167789 6.8322649,1.235755 6.3836208,1.4255151 5.9907456,1.7213092 5.6850543,2.0917213 5.6544853,2.128763 5.6247878,2.1665502&#xD;&#xA;5.595994,2.2050521 5.2504654,2.6670778 5.0350066,3.2320294 5.0039039,3.8456202 5.0013118,3.8967531 5,3.9482234 5,3.9999998 L5,18.583746 5,19.674547 4.9652105,19.690275 C4.6719384,19.831589 4.3900276,19.992746 4.1212201,20.172005 L4.1005454,20.186316 4.0862332,20.19549 3.9549969,20.287048 3.9220994,20.309816 3.9181786,20.312735 3.9135559,20.31596 C3.8566318,20.356956 3.8003481,20.398788 3.7447233,20.441435 L3.7389174,20.446169 3.7280555,20.454254 C3.6642387,20.503485 3.6012953,20.553793 3.5392523,20.605152 L3.448601,20.682852 3.4190207,20.706968 3.3992689,20.725136 3.3558526,20.762348 C3.2956381,20.815779 3.2363515,20.870234 3.1780198,20.925682 L3.1316219,20.971325 3.1099842,20.991228 3.0837341,21.018435 3.0059178,21.094986 C2.9495237,21.152397 2.8941117,21.210777 2.8397093,21.270098 L2.8261578,21.285393 2.8184729,21.293358 2.8006618,21.314169 2.6795578,21.450855 2.5631998,21.591635 2.5453461,21.612497 2.5386691,21.621315 2.5256267,21.637094 C2.4753714,21.700069 2.4261797,21.763931 2.378079,21.828651 L2.3143657,21.917542 2.2914629,21.947786 2.2613898,21.991449 2.2370787,22.025366 2.2095893,22.066656 2.1720059,22.12122 2.1323326,22.182695 2.1027885,22.227072 2.0831263,22.258942 2.0576818,22.298368 2.0073834,22.381716 1.9753716,22.433605 1.9634997,22.454433 1.9485983,22.479126 1.8819585,22.597492 1.8549921,22.644804 1.8504607,22.65344 1.8448623,22.663383 C1.8111868,22.725374 1.7784206,22.787931 1.7465813,22.851034 L1.7440977,22.85615 1.7418124,22.860504 1.7243909,22.896732 1.6538627,23.041973 1.6444288,23.063009 1.6359961,23.080545 1.6112025,23.137104 1.5668145,23.236088 1.5511535,23.274086 1.5377071,23.30476 1.5166806,23.357727 1.4855435,23.433275 1.4642827,23.489723 1.4471078,23.532988 1.4315157,23.576719 1.4101565,23.633427 1.3836716,23.710907 1.3643619,23.765064 1.3542034,23.797113 1.3407622,23.836435 1.3085869,23.941029 1.2896331,24.000826 1.2843638,24.019772&#xD;&#xA;1.2774672,24.042191 1.2341091,24.200468 1.223084,24.24011 1.2219171,24.244974 1.2203784,24.250591 C1.2023955,24.320486 1.1854648,24.390802 1.1696041,24.461523 L1.1672238,24.472975 1.1648782,24.482752 1.1538117,24.537493 1.1252513,24.674885 1.1201096,24.704203 1.1151793,24.728592 1.1049284,24.79077 1.0874276,24.890564 1.0805198,24.938826 1.0741501,24.977461 1.0671052,25.032545 1.05624,25.108456 1.0485816,25.177382 1.0419543,25.2292 1.0379763,25.272831 1.0317961,25.328453 1.0244273,25.421434 1.0187552,25.483646 1.0171089,25.513781 1.0142031,25.550447 1.0081908,25.677025 1.0047157,25.740633 1.0044344,25.756107&#xD;&#xA;1.0035687,25.774332 C1.0011955,25.849264 0.99999997,25.924492 0.99999991,26 1,26.48325 1.0489688,26.955061 1.1422152,27.410744 1.2121498,27.752506 1.3069905,28.085197 1.4247579,28.406836 1.738805,29.264538 2.2158871,30.04365 2.8184729,30.706642 2.8937965,30.789516 2.9710808,30.870575 3.0502525,30.949747 3.2877682,31.187263 3.5422733,31.407789 3.8117884,31.609348 3.9016269,31.676535 3.9931329,31.741613 4.0862332,31.80451 4.1793342,31.867407 4.2740288,31.928123&#xD;&#xA;4.3702455,31.986588 4.4664617,32.045048 4.564199,32.101257 4.6633845,32.155136 4.9609399,32.31678 5.2715268,32.457474 5.593165,32.575241 5.700378,32.614498 5.8088188,32.651207 5.9184141,32.685295 6.4663911,32.855732 7.0432344,32.960651 7.639781,32.990891 7.7590905,32.996941 7.8791876,33 8,33 8.1208124,33 8.2409096,32.996941 8.360219,32.990891 10.865715,32.863888 13.023644,31.419506 14.155138,29.336617 14.209019,29.237431&#xD;&#xA;14.260572,29.136797 14.309724,29.03479 14.653791,28.320736 14.880217,27.539328 14.96386,26.71571 14.987758,26.480391 15,26.241625 15,26 15,25.924492 14.998804,25.849264 14.996431,25.774332 L14.995565,25.756107 14.995284,25.740633 14.991809,25.677025 14.985797,25.550447 14.982891,25.513781 14.981245,25.483646 14.975573,25.421434 14.968204,25.328453 14.962024,25.272831 14.958046,25.2292 14.951419,25.177382 14.94376,25.108456 14.932895,25.032545 14.92585,24.977461 14.91948,24.938826 14.912572,24.890564 14.895072,24.79077 14.884821,24.728592 14.87989,24.704203 14.874748,24.674885 14.846189,24.537493 14.835122,24.482752 14.832776,24.472975&#xD;&#xA;14.830396,24.461523 C14.814535,24.390802 14.797605,24.320486 14.779621,24.250591 L14.778083,24.244974 14.776917,24.24011 14.765891,24.200468 14.722533,24.042191 14.715636,24.019772 14.710367,24.000826 14.691413,23.941029 14.659238,23.836435 14.645797,23.797113 14.635638,23.765064 14.616328,23.710907 14.589844,23.633427 14.568484,23.576719 14.552893,23.532988 14.535717,23.489723 14.514457,23.433275 14.483319,23.357727 14.462293,23.30476 14.448847,23.274086 14.433186,23.236088 14.388798,23.137104 14.364004,23.080545 14.355572,23.063009&#xD;&#xA;14.346137,23.041973 14.275609,22.896732 14.258187,22.860504 14.255902,22.85615 14.253419,22.851034 C14.22158,22.787931 14.188813,22.725374 14.155138,22.663383 L14.149539,22.65344 14.145008,22.644804 14.118041,22.597492 14.051402,22.479126 14.0365,22.454433 14.024629,22.433605 13.992617,22.381716 13.942318,22.298368 13.916874,22.258942 13.897212,22.227072 13.867667,22.182695 13.827994,22.12122 13.790411,22.066656 13.762921,22.025366 13.73861,21.991449 13.708537,21.947786 13.685635,21.917542 13.621921,21.828651 C13.57382,21.763931 13.524629,21.700069 13.474373,21.637094 L13.461331,21.621315 13.454654,21.612497 13.4368,21.591635 13.320442,21.450855 13.199338,21.314169 13.181527,21.293358 13.173842,21.285393 13.160291,21.270098 C13.105888,21.210777 13.050476,21.152397 12.994082,21.094986 L12.916266,21.018435 12.890016,20.991228 12.868379,20.971325 12.821981,20.925682 C12.763649,20.870234 12.704362,20.815779 12.644148,20.762348 L12.600726,20.72513 12.580979,20.706968 12.551404,20.682856 12.460748,20.605152 C12.398706,20.553793 12.335761,20.503485 12.271945,20.454254 L12.261083,20.446169 12.255277,20.441435 C12.199652,20.398788 12.143369,20.356956 12.086444,20.31596 L12.081821,20.312735 12.077901,20.309816 12.045003,20.287048 11.913767,20.19549 11.899455,20.186316 11.878779,20.172005 C11.609973,19.992746 11.328062,19.831589 11.03479,19.690275 L11,19.674547 11,18.583746 11,3.9999998 C11,3.9482234 10.998689,3.8967531 10.996097,3.8456202 10.93389,2.6184385 10.134261,1.5858136 9.0315008,1.182039 8.9855528,1.1652154 8.9390774,1.1494831 8.8921089,1.134874 8.8451386,1.120265 8.7976742,1.1067792 8.7497473,1.0944476 8.7018194,1.0821167 8.6534281,1.07094 8.6046048,1.0609492 8.4581356,1.0309774 8.3077774,1.0116793 8.1543799,1.0039036 8.1032467,1.0013117 8.0517769,1 8,0.99999994 z M8,0 C10.209139,0 12,1.7908611 12,3.9999998 L12,19 11.998182,19.071877 12.148291,19.158186 C14.457481,20.561285 16,23.100504 16,26 16,30.418278 12.418278,34 8,34 3.5817221,34 5.9604645E-08,30.418278 0,26 5.9604645E-08,23.100504 1.542519,20.561285 3.8517089,19.158186 L4.0018177,19.071877 4,19 4,3.9999998 C4,1.7908611 5.7908612,0 8,0 z" />
+                            </Grid>
+                            <ContentPresenter Visibility="Collapsed" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </StackPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- 应该在此定义资源字典条目。-->
+</ResourceDictionary>

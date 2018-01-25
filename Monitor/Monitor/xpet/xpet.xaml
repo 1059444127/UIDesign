@@ -1,0 +1,25 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Monitor="clr-namespace:Monitor" x:Class="Monitor.xpet.xpet"
+        mc:Ignorable="d"
+        Title="xpet" Style="{DynamicResource WindowStyle}" ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight">
+	<Grid>
+		<ContentControl x:Name="PanelContent" Margin="0,0,0,20">
+			<Monitor:OpenFile/>
+		</ContentControl>
+		<Menu VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,-50,0,0">
+            <MenuItem Header="Menu">
+            	<MenuItem Header="Add_Protocol" Click="Add_Protocol"/>
+            	<MenuItem Header="Login" Click="Login"/>
+				<MenuItem Header="OpenFile" Click="OpenFile"/>
+				<MenuItem Header="Protocol" Click="Protocol"/>
+				<MenuItem Header="Setting" Click="Setting"/>
+				<MenuItem Header="Match Info" Click="Match"/>
+				<MenuItem Header="Message" Click="message"/>
+            </MenuItem>
+		</Menu>
+	</Grid>
+</Window>

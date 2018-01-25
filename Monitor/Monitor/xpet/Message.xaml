@@ -1,0 +1,35 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.Message"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="180">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		<Grid Margin="0,20" Background="#FF162127">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<Image Width="20" Height="20" Margin="40,36"/>
+			<TextBlock Grid.Column="1" Text="XXXXXXXXXXXXXXXXXX"/>
+			<Button Grid.Column="2" IsEnabled="False" BorderThickness="0">
+				<Border Height="30" Padding="10,0" Background="#19FFFFFF" CornerRadius="15">
+					<TextBlock TextWrapping="Wrap" Text="Shut down after 3s" VerticalAlignment="Stretch"/>
+				</Border>
+			</Button>
+		</Grid>
+		<Grid VerticalAlignment="Center" Grid.Row="1">
+			<Button Content="Cancel" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,164,0"/>
+			<Button Content="Save" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource HighlightButton}"/>
+		</Grid>
+	</Grid>
+</UserControl>

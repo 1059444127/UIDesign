@@ -1,0 +1,93 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:coverter="clr-namespace:UIH.XA.CommonTheme.Style;assembly=UIH.XA.CommonTheme"
+	x:Class="Monitor.exam_Task"
+	x:Name="Window"
+	Title="Task"
+    Style="{StaticResource WindowStyle}"
+    Height="602" 
+    Width="813"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize">
+    <Window.Resources>
+
+        <coverter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <DataTemplate x:Key="DataGrid_DataTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ProgressBar Grid.Row="0" Value="50" Height="5" Width="147" VerticalAlignment="Stretch" Foreground="#FF35A266" Margin="0,0,0,7"/>
+                <TextBlock Text="Archiving" Grid.Row="1" LineHeight="20" FontSize="9" Foreground="#99EAF1F8" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <TextBlock Text="3.6M" Grid.Row="1" FontSize="9" Foreground="#99EAF1F8"/>
+                    <TextBlock Text="/" Grid.Row="1" FontSize="9" Foreground="#99EAF1F8"/>
+                    <TextBlock Text="5.9M" Grid.Row="1" FontSize="9" Foreground="#99EAF1F8"/>
+                </StackPanel>
+                <Label x:Name="label_pause" Grid.RowSpan="2" Width="18" Height="18" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Path Data="M10.5,4 C10.223857,4 10,4.2238574 10,4.5 L10,13.5 C10,13.776142 10.223857,14 10.5,14 L11.5,14 C11.776142,14 12,13.776142 12,13.5 L12,4.5 C12,4.2238574 11.776142,4 11.5,4 z M6.5,4 C6.2238574,4 6,4.2238574 6,4.5 L6,13.5 C6,13.776142 6.2238574,14 6.5,14 L7.5,14 C7.7761421,14 8,13.776142 8,13.5 L8,4.5 C8,4.2238574 7.7761421,4 7.5,4 z M9,0 C13.970563,0 18,4.0294371 18,9 18,13.970563 13.970563,18 9,18 4.0294371,18 0,13.970563 0,9 0,4.0294371 4.0294371,0 9,0 z" Fill="#FF96a3ab" Stretch="Fill"/>
+
+                </Label>
+                <Label x:Name="label_complete" Grid.RowSpan="2" Width="18" Height="18" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Path Data="M13.19893,5.4584756 C13.071505,5.4590116 12.943874,5.5081587 12.846244,5.6057897 L8.0592136,10.392819 5.9938002,8.3274059 C5.8001733,8.1337786 5.4849162,8.1351042 5.2896543,8.3303661 L4.5825472,9.0374737 C4.3872852,9.2327356 4.3859596,9.5479927 4.5795865,9.7416191 L6.9939609,12.155993 6.9955101,12.157709 7.6966949,12.858893 C7.8903222,13.052521 8.2055788,13.051195 8.4008408,12.855933 L14.248614,7.0081596 C14.443876,6.8128977 14.445202,6.4976411 14.251575,6.3040137 L13.55039,5.6028285 C13.453577,5.5060148 13.326355,5.4579396 13.19893,5.4584756 z M9,0 C13.970563,0 18,4.0294371 18,9 18,13.970563 13.970563,18 9,18 4.0294371,18 0,13.970563 0,9 0,4.0294371 4.0294371,0 9,0 z" Fill="#FF3abb68"  Stretch="Fill"/>
+
+                </Label>
+                <Label x:Name="label_tipsInfo" Grid.RowSpan="2" Width="18" Height="18" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                    <Path Data="M8.5,6 C8.2238579,6 8,6.2238574 8,6.5 L8,14.5 C8,14.776142 8.2238579,15 8.5,15 L9.5,15 C9.7761421,15 10,14.776142 10,14.5 L10,6.5 C10,6.2238574 9.7761421,6 9.5,6 z M9,3 C8.4477148,3 8,3.4477153 8,4 8,4.5522847 8.4477148,5 9,5 9.5522842,5 10,4.5522847 10,4 10,3.4477153 9.5522842,3 9,3 z M9,0 C13.970563,0 18,4.0294371 18,9 18,13.970563 13.970563,18 9,18 4.0294371,18 0,13.970563 0,9 0,4.0294371 4.0294371,0 9,0 z" Fill="#FFF26565" Stretch="Fill"/>
+
+                </Label>
+                <Popup x:Name="tips" PlacementTarget="{Binding ElementName=label_tipsInfo}" Placement="Bottom" HorizontalOffset="-24" VerticalOffset="5" IsOpen="{Binding IsMouseOver, ElementName=label_tipsInfo, Mode=OneWay}" AllowsTransparency="True">
+                    <Grid>
+                        <Path Fill="#FFC4D0D7" Data="M0,5 L5,0 L10,5 Z" Width="10" Height="5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,0,0,0"/>
+                        <Border x:Name="Border" Background="#FFC4D0D7"  CornerRadius="2" Margin="0,5,0,0" Padding="10">
+                            <TextBlock Foreground="#FF1B2E37" FontSize="14" Text="The disk is disconnected.&#xa;Please Check and try again."/>
+                        </Border>
+                    </Grid>
+                </Popup>
+                <Button Content="Resume" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"  Style="{DynamicResource NoBorderButtonStyle}"/>
+
+                <Label Grid.RowSpan="2" Width="18" Height="18" Padding="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Grid Width="18" Height="18">
+                        <Path Data="M13.5,7.1054274E-15 C14.328427,-6.7055218E-08 15,0.6715728 15,1.4999999 15,2.328427 14.328427,2.9999999 13.5,2.9999999 12.671573,2.9999999 12,2.328427 12,1.4999999 12,0.6715728 12.671573,-6.7055218E-08 13.5,7.1054274E-15 z M7.5,7.1054274E-15 C8.3284273,-6.7055218E-08 9,0.6715728 9,1.4999999 9,2.328427 8.3284273,2.9999999 7.5,2.9999999 6.6715727,2.9999999 6,2.328427 6,1.4999999 6,0.6715728 6.6715727,-6.7055218E-08 7.5,7.1054274E-15 z M1.4999999,7.1054274E-15 C2.3284271,-6.7055218E-08 3,0.6715728 3,1.4999999 3,2.328427 2.3284271,2.9999999 1.4999999,2.9999999 0.67157286,2.9999999 0,2.328427 0,1.4999999 0,0.6715728 0.67157286,-6.7055218E-08 1.4999999,7.1054274E-15 z" Fill="#96a3ab" Stretch="Fill" Width="15" Height="3"/>
+                    </Grid>
+                </Label>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+
+
+
+
+
+    <Grid x:Name="LayoutRoot" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="83"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <RadioButton x:Name="Tab_Archive" Content="Archive" Style="{DynamicResource Tab_RadioButtonStyle}" IsChecked="True"/>
+            <Rectangle Height="42" Width="1" Fill="#33FFFFFF"/>
+            <RadioButton x:Name="Tab_XX" Content="XXXXXXXX" Style="{DynamicResource Tab_RadioButtonStyle}"/>
+            <Rectangle Height="42" Width="1" Fill="#33FFFFFF"/>
+            <RadioButton x:Name="Tab_XXXX" Content="XXXXX" Style="{DynamicResource Tab_RadioButtonStyle}"/>
+        </StackPanel>
+        <CheckBox Content="Display Complate" HorizontalAlignment="Right" Margin="0,0,25,0" Foreground="{DynamicResource Title_Color}"/>
+        <Grid Grid.Row="1" Visibility="{Binding IsChecked,Converter={StaticResource BoolToVisibilityConverter}, ElementName=Tab_Archive}">
+            <DataGrid  AutoGenerateColumns="False" RowHeight="40"/>
+        </Grid>
+        <Grid Grid.Row="1" Visibility="{Binding IsChecked,Converter={StaticResource BoolToVisibilityConverter}, ElementName=Tab_XX}">
+
+        </Grid >
+        <Grid Grid.Row="1" Visibility="{Binding IsChecked,Converter={StaticResource BoolToVisibilityConverter}, ElementName=Tab_XXXX}">
+            
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,12">
+            <Button Content="Start" Width="111"/>
+            <Button Content="Pause" Width="111" Visibility="Collapsed"/>
+            <Button Content="Delete" Width="111" Margin="10,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

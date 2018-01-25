@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Monitor.Exam.ArchivePanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+            <StackPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+        <DataTemplate x:Key="Where_DataTemplate">
+        	<StackPanel Orientation="Horizontal">
+                <Image x:Name="Img" Source="{DynamicResource CD}" Width="19" Height="19" Margin="0,0,5,0"/> 
+				<TextBlock Text="{Binding}"/>	
+			</StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="88"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Patient Name" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Foreground="#99EAF1F8"/>
+        <TextBlock Grid.Column="3" Text="UIH"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Foreground="#FFEAF1F8" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis"/>
+        <TextBlock Grid.Row="1" Text="Where" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Foreground="#99EAF1F8"/>
+        <ComboBox Grid.Row="1" Grid.Column="2" Width="310" HorizontalAlignment="Left" >
+        	<ComboBoxItem Content="CD/DVD 1" ContentTemplate="{DynamicResource Where_DataTemplate}" />
+        </ComboBox>
+        <TextBlock Grid.Row="3" Text="Format" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20" Foreground="#99EAF1F8"/>
+        <ComboBox Grid.Row="3" Grid.Column="2" Width="310" HorizontalAlignment="Left" SelectedIndex="0">
+        	<ComboBoxItem Content="DICOM"/>
+        </ComboBox>
+        <StackPanel Grid.Row="3" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Center">
+            <TextBlock Text="56" Style="{DynamicResource Content}" Foreground="#99EAF1F8"/>
+            <TextBlock Text="/"  Style="{DynamicResource Content}" Foreground="#99EAF1F8"/>
+            <TextBlock Text="389M"  Style="{DynamicResource Content}" Foreground="#99EAF1F8"/>
+        </StackPanel>
+        <Border Grid.ColumnSpan="3" Grid.Row="5" Background="#FF18242A">
+        	<ScrollViewer>
+	            <ItemsControl ItemsSource="{Binding Collection}"  ItemsPanel="{DynamicResource ItemsPanelTemplate}" HorizontalAlignment="Center" Margin="0,15">
+	                <ItemsControl.ItemTemplate>
+	                    <DataTemplate>
+	                        <Border x:Name="Bd" Margin="0,5" >
+	                            <CheckBox Content="{Binding name}"/>
+	                        </Border>
+	                    </DataTemplate>
+	                </ItemsControl.ItemTemplate>
+	            </ItemsControl>					
+			</ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button Content="Archive"  Width="154" Margin="10,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

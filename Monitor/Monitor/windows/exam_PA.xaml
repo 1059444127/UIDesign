@@ -1,0 +1,43 @@
+﻿<Window x:Class="Monitor.windows.exam_PA"
+ 	 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Monitor.ViewModel" 
+         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
+        xmlns:PA="clr-namespace:Monitor.PA"
+        Title="exam_PA"
+        mc:Ignorable="d"
+        Style="{StaticResource WindowStyle}"
+        Width="1404" 
+        Height="1124"
+        x:Name="Window"
+	    WindowStartupLocation="CenterScreen"
+        >
+    <Window.DataContext>
+        <viewModel:PaViewModel></viewModel:PaViewModel>
+    </Window.DataContext>
+    <Window.Tag>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="H" Margin="0,0,2,0" Command="{Binding}" BorderThickness="0"/>
+            <Button Content="B" Margin="0,0,2,0" Command="{Binding}" BorderThickness="0"/>
+            <Button Content="T" Margin="0,0,2,0" Command="{Binding}" BorderThickness="0"/>
+        </StackPanel>
+    </Window.Tag>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+		<Grid x:Name="content">
+                <PA:PatientAdmin/>
+                <!--<PA:PatientListAdmin/>-->
+        </Grid>
+            <!--foot-->
+		<Grid x:Name="Foot" Grid.Row="1">
+            <StackPanel>
+                <Image/>
+            </StackPanel>
+    </Grid>
+    </Grid>
+</Window>

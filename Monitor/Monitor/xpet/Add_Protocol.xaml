@@ -1,0 +1,209 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.Add_Protocol"
+	x:Name="UserControl"
+	d:DesignWidth="1024" d:DesignHeight="768">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="Background" Value="{DynamicResource ListBG_Color}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="SelectionMode" Value="Extended"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource white70_Font}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}" BorderThickness="0" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--<Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
+                        </Trigger>-->
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <DataTemplate x:Key="DataTemplate">
+        	<Border>
+        		<RadioButton Content="{TemplateBinding Content}" Focusable="False" IsChecked="{Binding IsSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}" IsHitTestVisible="False"/>
+        	</Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="5" Margin="0,20">
+            <TextBlock Text="Protocol Name" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Width="300"/>
+            <TextBlock Text="Working Mode" Margin="100,0,10,0" VerticalAlignment="Center" />
+            <ComboBox Width="260"/>
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox TextWrapping="NoWrap" Focusable="False" Padding="10,0,34,0" Uid="Search"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+                    <Grid>
+                        <Rectangle Width="20" Height="2" Fill="{DynamicResource BtnHove}"/>
+                        <Rectangle Width="2" Height="20" Fill="{DynamicResource BtnHove}"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <!--cancel按钮-->
+        </Grid>
+        <ListBox Grid.Row="2" Margin="0,0,1,0">
+            <ListBoxItem Content="ListBoxItem" IsSelected="True">
+                <ListBoxItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Set as default" IsEnabled="False"/>
+                        <MenuItem Header="Save as"/>
+                    </ContextMenu>
+                </ListBoxItem.ContextMenu>
+            </ListBoxItem>
+            <ListBoxItem Content="ListBoxItem">
+                <ListBoxItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Set as default"/>
+                        <MenuItem Header="Save as"/>
+                    </ContextMenu>
+                </ListBoxItem.ContextMenu>
+            </ListBoxItem>
+        </ListBox>
+        <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
+            <TextBox Text="Surgical Type" Focusable="False"/>
+            <Grid Background="#FF1B2E37">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Age Group" HorizontalAlignment="Right" Margin="10,0"/>
+                <ComboBox Grid.Column="1" Margin="0,10,20,10"/>
+                <TextBlock Text="Optimization" HorizontalAlignment="Right" Margin="10,0" Grid.Row="1"/>
+                <ComboBox Grid.Column="1" Margin="0,10,20,10" Grid.Row="1"/>
+            </Grid>
+            <TextBox Text="Surgical Type" Focusable="False" Margin="0,10,0,0"/>
+            <Grid Background="#FF1B2E37">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="GRID" HorizontalAlignment="Right" Margin="10,0"/>
+                <ComboBox Grid.Column="1" Margin="0,10,20,10"/>
+                <TextBlock Text="SID" HorizontalAlignment="Right" Margin="10,0" Grid.Row="1"/>
+                <ComboBox Grid.Column="1" Margin="0,10,20,10" Grid.Row="1"/>
+            </Grid>
+            <TextBox Text="Surgical Type" Focusable="False" Margin="0,10,0,0"/>
+            <Grid Background="#FF1B2E37">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Margin="10,0"/>
+                <ComboBox Grid.Column="1" Margin="0,10,20,10"/>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Column="3" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox TextWrapping="NoWrap" Padding="10,0,34,0" Uid="Search"  Focusable="False"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+                    <Image Source="{DynamicResource search}" Width="24" Height="24"/>
+                </Button>
+            </StackPanel>
+            <!--cancel按钮-->
+        </Grid>
+        <ListBox Grid.Column="3" Margin="0,0,1,0" Style="{DynamicResource FileListControl}" Grid.Row="2">
+            <ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+            <ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+            <ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+        </ListBox>
+        <Grid Grid.Column="4" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox TextWrapping="NoWrap" Padding="10,0,34,0" Uid="Search"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+                    <Image Source="{DynamicResource search}" Width="24" Height="24"/>
+                </Button>
+                <Button HorizontalAlignment="Right" BorderThickness="0" Width="42" Visibility="Collapsed">
+                    <!--添加按钮-->
+                    <Grid>
+                        <Rectangle Width="24" Height="2" Fill="{DynamicResource BtnHove}"/>
+                        <Rectangle Width="2" Height="24" Fill="{DynamicResource BtnHove}"/>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <!--cancel按钮-->
+        </Grid>
+        <ListBox Grid.Column="4" Margin="0,0,1,0" Style="{DynamicResource FileListControl}" Grid.Row="2">
+            <ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+			<ListBoxItem Content="listboxitem" ContentTemplate="{DynamicResource DataTemplate}"/>
+        </ListBox>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,10" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Cancel" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+            <Button Content="Save" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource HighlightButton}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

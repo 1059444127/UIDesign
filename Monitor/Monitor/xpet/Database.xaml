@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Monitor.Database"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignWidth="1000">
+    <StackPanel>
+        <TextBox Text="Protocol Manage" Focusable="False" Grid.Column="2"/>
+		<Grid Background="#FF1B2E37">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock TextWrapping="NoWrap" Text="Backup present database to:" Margin="20,0,0,0"/>
+                <TextBlock TextWrapping="NoWrap" Text="C://databackup/201712123456" Margin="10,0,0,0" Style="{DynamicResource FontSub}"/>
+                <Button Content="Change path" BorderThickness="0" Foreground="{DynamicResource Highlighted}" Margin="20,0,0,0"/>
+            </StackPanel>
+            <Button Content="Backup" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Margin="20,10"/>
+        </Grid>
+        <!--上下两个部分-->
+        <Grid Background="#FF1B2E37">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Recovery database from:" Margin="20,10" Height="48"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <RadioButton Content="Backup DataBase" Margin="20,10,0,10" Width="136"/>
+                <ComboBox VerticalAlignment="Stretch" Width="120" Margin="0,10"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <RadioButton Content="Custom Location"  Margin="20,0,0,0" Width="136"/>
+                <TextBlock TextWrapping="NoWrap" Text="C://databackup/201712123456" Margin="10,0,0,0" Style="{DynamicResource FontSub}"/>
+                <Button Content="Change path" BorderThickness="0" Foreground="{DynamicResource Highlighted}" Margin="20,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                <RadioButton Content="Factory Reset" Margin="20,0,0,0" Width="136"/>
+            </StackPanel>
+            <Button Content="Recovery" Width="154" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Margin="20,10" Grid.Row="3"/>
+        </Grid>
+    </StackPanel>
+</UserControl>

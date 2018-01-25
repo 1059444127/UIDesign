@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EBFE99D8-6327-4152-A22D-65ECF9F634EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UIH.XA.CommonTheme</RootNamespace>
+    <AssemblyName>UIH.XA.CommonThemeold</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\..\..\UIH\bin_debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\CommonTheme.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>..\..\..\..\UIH\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\CommonTheme.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\UIH\bin\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Reference Include="System.Windows.Interactivity">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\UIH\bin_debug\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Reference Include="System.Windows.Interactivity">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\UIH\bin\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions">
+      <Private>False</Private>
+      <HintPath>..\..\..\..\UIH\bin\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Style\Converter.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Icon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Page Include="Style\C_Style.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\MainStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Path_Color.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\Public.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Style\WinStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Layout1X1.png" />
+    <Resource Include="Image\Text.png" />
+    <Resource Include="Image\Shutter.png" />
+    <Resource Include="Image\Inverse.png" />
+    <Resource Include="Image\Freehand.png" />
+    <Resource Include="Image\Ruler.png" />
+    <Resource Include="Image\Arrow.png" />
+    <Resource Include="Image\Angle.png" />
+    <Resource Include="Image\Circle.png" />
+    <Resource Include="Image\Line.png" />
+    <Resource Include="Image\Female.png" />
+    <Resource Include="Image\Layout2X2.png" />
+    <Resource Include="Image\Male.png" />
+    <Resource Include="Image\UnKnow.png" />
+    <Resource Include="Image\Configuration.png" />
+    <Resource Include="Image\23.png" />
+    <Resource Include="Image\Information.png" />
+    <Resource Include="Image\25.png" />
+    <Resource Include="Image\26.png" />
+    <Resource Include="Image\Emergency.png" />
+    <Resource Include="Image\PatientList.png" />
+    <Resource Include="Image\Layout3X3.png" />
+    <Resource Include="Image\30.png" />
+    <Resource Include="Image\32.png" />
+    <Resource Include="Image\33.png" />
+    <Resource Include="Image\34.png" />
+    <Resource Include="Image\35.png" />
+    <Resource Include="Image\36.png" />
+    <Resource Include="Image\37.png" />
+    <Resource Include="Image\RayOn.png" />
+    <Resource Include="Image\RayOk.png" />
+    <Resource Include="Image\4.3.png" />
+    <Resource Include="Image\Layout4X4.png" />
+    <Resource Include="Image\CounterclockwiseRotation.png" />
+    <Resource Include="Image\Flip.png" />
+    <Resource Include="Image\Roll.png" />
+    <Resource Include="Image\LLabel.png" />
+    <Resource Include="Image\RLabel.png" />
+    <Resource Include="Image\Group 26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\ClockwiseRotation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\RayOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\BodyPartDemo.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\PatientListCopy.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\LockReference.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\AddItem.png" />
+    <Resource Include="Image\AddPic.png" />
+    <Resource Include="Image\Emergency1.png" />
+    <Resource Include="Image\LockReferenceCopy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\CD.png" />
+    <Resource Include="Image\CD_grey.png" />
+    <Resource Include="Image\PACS.png" />
+    <Resource Include="Image\PACS_grey.png" />
+    <Resource Include="Image\USB.png" />
+    <Resource Include="Image\USB_grey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Manual.png" />
+    <Resource Include="Image\Bone.png" />
+    <Resource Include="Image\Head.png" />
+    <Resource Include="Image\Leggs.png" />
+    <Resource Include="Image\Abdomen.png" />
+    <Resource Include="Image\Arms.png" />
+    <Resource Include="Image\Chest.png" />
+    <Resource Include="Image\Reset.png" />
+    <Resource Include="Image\Rotate.png" />
+    <Resource Include="Image\Heart.png" />
+    <Resource Include="Image\Pain.png" />
+    <Resource Include="Image\Pancreas.png" />
+    <Resource Include="Image\Pelvis.png" />
+    <Resource Include="Image\Stomach.png" />
+    <Resource Include="Image\Vessel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Ellipse.png" />
+    <Resource Include="Image\Rectangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Pointer.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

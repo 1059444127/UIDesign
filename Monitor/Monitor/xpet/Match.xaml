@@ -1,0 +1,36 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.Match"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<TextBox Text="Surgical Type" Focusable="False" Height="Auto"/>
+		<ListBox Grid.Row="1">
+			<ListBoxItem Content="ListBoxItem" IsSelected="True">
+				<ListBoxItem.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Set as default" IsEnabled="False"/>
+						<MenuItem Header="Save as"/>
+					</ContextMenu>
+				</ListBoxItem.ContextMenu>
+			</ListBoxItem>
+			<ListBoxItem Content="ListBoxItem">
+				<ListBoxItem.ContextMenu>
+					<ContextMenu>
+						<MenuItem Header="Set as default"/>
+						<MenuItem Header="Save as"/>
+					</ContextMenu>
+				</ListBoxItem.ContextMenu>
+			</ListBoxItem>
+		</ListBox>
+	</Grid>
+</UserControl>

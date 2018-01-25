@@ -1,0 +1,229 @@
+﻿<Window x:Class="Monitor.windows.TestBrush"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewModel="clr-namespace:Monitor.ViewModel"
+        Title="TestBrush"
+        Width="1720" 
+        Height="1440"
+        Background="DarkGray">
+    <Window.DataContext>
+        <viewModel:TestBrushViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding DataText}"></TextBlock>
+            <Button HorizontalAlignment="Left" Margin="75,0,0,0" Width="25">
+                <Button.Content>
+                    <Image Source="\Image\Open.JPG"></Image>
+                </Button.Content>
+            </Button>
+            <TextBlock Text="{Binding Number}" Grid.Column="2" HorizontalAlignment="Right"></TextBlock>
+        </Grid>
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Visible">
+            <DockPanel Background="Black" >
+                <DockPanel DockPanel.Dock="Top" Visibility="{Binding GridVisibility}" Background="#FF242626">
+                    <GroupBox Header="MarkedImage" Visibility="{Binding GroupBoxVisibility}" DockPanel.Dock="Top">
+                        <ListBox Name="MarkImage" Style="{StaticResource ListImgStyle}" ItemsSource="{Binding RefImageList}" Margin="0,15,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Border VerticalAlignment="Top" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+                                            <Border.Background>
+                                                <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                                                    <GradientStop Color="#99000000" Offset="1"/>
+                                                    <GradientStop Color="#00000000" Offset="0"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="AAA" Margin="3,0,0,0"/>
+                                                <TextBlock Text="BBB" Margin="5,0,0,0"/>
+                                                <TextBlock Text="CCC" Margin="5,0,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                        <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Visibility="{Binding  Visibility}">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="#FF29BBDD"/>
+                                                    <GradientStop Color="#7F318BC1" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <TextBlock Text="{Binding Type}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding StudyID}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                    <GroupBox Header="AllImage" DockPanel.Dock="Bottom">
+                        <ListBox Name="ImageList" Style="{StaticResource ListImgStyle}" ItemsSource="{Binding ImagesList}"  Margin="0,15,0,0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock x:Name="icon" Width="196" Height="166" Grid.ColumnSpan="3" Text="{Binding Name}"/>
+                                        <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Visibility="{Binding  Visibility}">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="#FF29BBDD"/>
+                                                    <GradientStop Color="#7F318BC1" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <TextBlock Text="{Binding Type}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding StudyID}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                </DockPanel>
+                <ItemsControl DockPanel.Dock="Bottom" ItemsSource="{Binding BrowserImageCollection}" Margin="0,15,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Expander Header="{Binding DataText}" Uid="1" FontSize="16">
+                                    <DockPanel Background="#FF242626">
+                                        <GroupBox Header="ReferenceImage" Padding="0,8" DockPanel.Dock="Top" Visibility="{Binding GroupBoxVisibility}">
+                                            <ListBox Name="MarkImage" Style="{StaticResource ListImgStyle}" ItemsSource="{Binding ReferenceImageList}" Margin="0,15,0,0">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="30"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="30"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Border VerticalAlignment="Top" Grid.ColumnSpan="3" HorizontalAlignment="Stretch">
+                                                                <Border.Background>
+                                                                    <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
+                                                                        <GradientStop Color="#99000000" Offset="1"/>
+                                                                        <GradientStop Color="#00000000" Offset="0"/>
+                                                                    </LinearGradientBrush>
+                                                                </Border.Background>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock Text="AAA" Margin="3,0,0,0"/>
+                                                                    <TextBlock Text="BBB" Margin="5,0,0,0"/>
+                                                                    <TextBlock Text="CCC" Margin="5,0,0,0"/>
+                                                                </StackPanel>
+                                                            </Border>
+                                                            <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Visibility="{Binding  Visibility}">
+                                                                <Ellipse.Fill>
+                                                                    <RadialGradientBrush>
+                                                                        <GradientStop Color="#FF29BBDD"/>
+                                                                        <GradientStop Color="#7F318BC1" Offset="1"/>
+                                                                    </RadialGradientBrush>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                            <TextBlock Text="{Binding Type}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="1"/>
+                                                            <TextBlock Text="{Binding StudyID}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </GroupBox>
+                                        <GroupBox Header="AllImage" Padding="0,15,0,8" DockPanel.Dock="Bottom" >
+                                            <ListBox Name="ImageList" Style="{StaticResource ListImgStyle}" ItemsSource="{Binding AllImageList}"  Margin="0,15,0,0">
+                                                <ListBox.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="30"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="auto"/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="*"/>
+                                                                <RowDefinition Height="30"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock x:Name="icon" Width="196" Height="166" Grid.ColumnSpan="3" Text="{Binding Name}"/>
+                                                            <Ellipse Width="10" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Visibility="{Binding  Visibility}">
+                                                                <Ellipse.Fill>
+                                                                    <RadialGradientBrush>
+                                                                        <GradientStop Color="#FF29BBDD"/>
+                                                                        <GradientStop Color="#7F318BC1" Offset="1"/>
+                                                                    </RadialGradientBrush>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                            <TextBlock Text="{Binding Type}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="1"/>
+                                                            <TextBlock Text="{Binding StudyID}" Style="{DynamicResource FontSub}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0"/>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListBox.ItemTemplate>
+                                            </ListBox>
+                                        </GroupBox>
+                                    </DockPanel>
+                                </Expander>
+                                <TextBlock Text="{Binding Number}" HorizontalAlignment="Right" Margin="0,0,15,0" VerticalAlignment="Top" FontSize="14"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </ScrollViewer>
+    </Grid>
+    <!--<ItemsControl>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="2017/07/12" HorizontalAlignment="Right"></TextBlock>
+                    <TextBlock Text="12" HorizontalAlignment="Left"></TextBlock>
+                    <Border Grid.Row="1" Background="Gray">
+                        <DockPanel Margin="0,15">
+                            <GroupBox Header="ReferenceImage" Padding="0,8" DockPanel.Dock="Top" >
+                                <ListBox Name="ReferenceImageList" Margin="0,15,0,0">
+                                   <ListBoxItem>AAAA</ListBoxItem>
+                                   <ListBoxItem>BBBB</ListBoxItem>
+                                   <ListBoxItem>CCCC</ListBoxItem>
+                                   <ListBoxItem>DDDD</ListBoxItem>
+                                </ListBox>
+                            </GroupBox>
+                            <GroupBox Header="AllImage" Padding="0,15,0,8" DockPanel.Dock="Bottom" >
+                                <ListBox Name="ImageList" Margin="0,15,0,0">
+                                    <ListBoxItem>AAAA</ListBoxItem>
+                                    <ListBoxItem>BBBB</ListBoxItem>
+                                    <ListBoxItem>CCCC</ListBoxItem>
+                                    <ListBoxItem>DDDD</ListBoxItem>
+                                </ListBox>
+                            </GroupBox>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>-->
+</Window>

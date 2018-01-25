@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monitor", "Monitor\Monitor.csproj", "{96DD86CD-F1B9-40B3-8697-77DA18599094}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monitor.Theme", "monitor.Theme\monitor.Theme.csproj", "{E3E27350-13FC-4AA7-B04C-B4DF43D9EF6A}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs.united-imaging.com:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Monitor\\Monitor.csproj
+		SccProjectName1 = Monitor
+		SccLocalPath1 = Monitor
+		SccProjectUniqueName2 = monitor.Theme\\monitor.Theme.csproj
+		SccProjectName2 = monitor.Theme
+		SccLocalPath2 = monitor.Theme
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96DD86CD-F1B9-40B3-8697-77DA18599094}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{96DD86CD-F1B9-40B3-8697-77DA18599094}.Debug|x64.Build.0 = Debug|Any CPU
+		{96DD86CD-F1B9-40B3-8697-77DA18599094}.Release|x64.ActiveCfg = Release|Any CPU
+		{96DD86CD-F1B9-40B3-8697-77DA18599094}.Release|x64.Build.0 = Release|Any CPU
+		{E3E27350-13FC-4AA7-B04C-B4DF43D9EF6A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E3E27350-13FC-4AA7-B04C-B4DF43D9EF6A}.Debug|x64.Build.0 = Debug|Any CPU
+		{E3E27350-13FC-4AA7-B04C-B4DF43D9EF6A}.Release|x64.ActiveCfg = Release|Any CPU
+		{E3E27350-13FC-4AA7-B04C-B4DF43D9EF6A}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

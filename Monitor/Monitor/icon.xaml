@@ -1,0 +1,81 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.icon"
+	x:Name="UserControl"
+	d:DesignWidth="1024" d:DesignHeight="768">
+
+	<WrapPanel x:Name="LayoutRoot">
+		<Image Source="{DynamicResource Layout1X1}" Stretch="None"/>
+		<Image Source="{DynamicResource Layout2X2}" Stretch="None"/>
+		<Image Source="{DynamicResource Layout3X3}" Stretch="None"/>
+		<Image Source="{DynamicResource Layout4X4}" Stretch="None"/>
+		<Image Source="{DynamicResource CounterclockwiseRotation}" Stretch="None"/>
+		<Image Source="{DynamicResource ClockwiseRotation}" Stretch="None"/>
+		<Image Source="{DynamicResource Flip}" Stretch="None"/>
+		<Image Source="{DynamicResource Roll}" Stretch="None"/>
+		<Image Source="{DynamicResource LLabel}" Stretch="None"/>
+		<Image Source="{DynamicResource RLabel}" Stretch="None"/>
+		<Image Source="{DynamicResource Text}" Stretch="None"/>
+		<Image Source="{DynamicResource Shutter}" Stretch="None"/>
+		<Image Source="{DynamicResource Inverse}" Stretch="None"/>
+		<Image Source="{DynamicResource Freehand}" Stretch="None"/>
+		<Image Source="{DynamicResource EdgeEnhancement}" Stretch="None"/>
+		<Image Source="{DynamicResource Arrow}" Stretch="None"/>
+		<Image Source="{DynamicResource Circle}" Stretch="None"/>
+		<Image Source="{DynamicResource Line}" Stretch="None"/>
+		<Image Source="{DynamicResource Ruler}" Stretch="None"/>
+		<Image Source="{DynamicResource Angle}" Stretch="None"/>
+		<Image Source="{DynamicResource Reset}" Stretch="None"/>
+		<Image Source="{DynamicResource Rotate}" Stretch="None"/>
+		<Image Source="{DynamicResource Pointer}" Stretch="None"/>
+		<Image Source="{DynamicResource PresetWindow}" Stretch="None"/>
+		<Image Source="{DynamicResource Rectangle}" Stretch="None"/>
+		<Image Source="{DynamicResource Ellipse}" Stretch="None"/>
+		<Image Source="{DynamicResource Calibration}" Stretch="None"/>
+		<Image Source="{DynamicResource Female}" Stretch="None"/>
+		<Image Source="{DynamicResource female_select}" Stretch="None"/>
+		<Image Source="{DynamicResource Male}" Stretch="None"/>
+		<Image Source="{DynamicResource Male_select}" Stretch="None"/>
+		<Image Source="{DynamicResource UnKnow}" Stretch="None"/>
+		<Image Source="{DynamicResource examing}" Stretch="None"/>
+		<Image Source="{DynamicResource PatientList}" Stretch="None"/>
+		<Image Source="{DynamicResource Configuration}" Stretch="None"/>
+		<Image Source="{DynamicResource Information}" Stretch="None"/>
+		<Image Source="{DynamicResource PatientListCopy}" Stretch="None"/>
+		<Image Source="{DynamicResource LockReference}" Stretch="None"/>
+		<Image Source="{DynamicResource LockReferenceCopy}" Stretch="None"/>
+		<Image Source="{DynamicResource AddPicture}" Stretch="None"/>
+		<Image Source="{DynamicResource Emergency}" Stretch="None"/>
+		<Image Source="{DynamicResource RayOff}" Stretch="None"/>
+		<Image Source="{DynamicResource RayOn}" Stretch="None"/>
+		<Image Source="{DynamicResource RayOk}" Stretch="None"/>
+		<Image Source="{DynamicResource CD}" Stretch="None"/>
+		<Image Source="{DynamicResource CD_grey}" Stretch="None"/>
+		<Image Source="{DynamicResource PACS}" Stretch="None"/>
+		<Image Source="{DynamicResource PACS_grey}" Stretch="None"/>
+		<Image Source="{DynamicResource USB}" Stretch="None"/>
+		<Image Source="{DynamicResource USB_grey}" Stretch="None"/>
+		<Image Source="{DynamicResource search}" Stretch="None"/>
+		<Image Source="{DynamicResource AddItem}" Stretch="None"/>
+		<Image Source="{DynamicResource Refresh}" Stretch="None"/>
+		<Image Source="{DynamicResource DatePicker}" Stretch="None"/>
+		<Image Source="{DynamicResource Yline}" Stretch="None"/>
+		<Image Source="{DynamicResource Overview}" Stretch="None"/>
+		<Image Source="{DynamicResource Save}" Stretch="None"/>
+		<Image Source="{DynamicResource Print}" Stretch="None"/>
+		<Image Source="{DynamicResource Complete}" Stretch="None"/>
+		<Image Source="{DynamicResource Group_3}" Stretch="None"/>
+		<Image Source="{DynamicResource Group_4}" Stretch="None"/>
+		<Image Source="{DynamicResource Group_6}" Stretch="None"/>
+		<Image Source="{DynamicResource Group_11}" Stretch="None"/>
+		<Image Source="{DynamicResource Group_12}" Stretch="None"/>
+		<Image Source="{DynamicResource ruler}" Stretch="None"/>
+		<Image Source="{DynamicResource tip_T}" Stretch="None"/>
+		<Image Source="{DynamicResource Reset1}" Stretch="None"/>
+		<Image Source="{DynamicResource round}" Stretch="None"/>
+	</WrapPanel>
+</UserControl>

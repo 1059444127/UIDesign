@@ -1,0 +1,58 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Monitor.setting01"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+	<UserControl.Resources>
+		<DataTemplate x:Key="ListCheckBoxTemplate">
+			<Border x:Name="border">
+				<CheckBox Content="{TemplateBinding Content}"/>
+			</Border>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
+			<TextBox TextWrapping="NoWrap" Padding="10,0,126,0" Uid="Protocol Manage" Focusable="False"/>
+			<TextBox TextWrapping="NoWrap" Padding="10,0,126,0" Uid="Protocol Manage" Visibility="Hidden"/>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+				<Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+					<Image Source="{DynamicResource search}" Width="24" Height="24"/>
+				</Button>
+				<Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+					<Image Source="{DynamicResource search}" Width="24" Height="24"/>
+				</Button>
+				<Button HorizontalAlignment="Right" BorderThickness="0" Width="42">
+					<Image Source="{DynamicResource search}" Width="24" Height="24"/>
+				</Button>
+				<Button HorizontalAlignment="Right" BorderThickness="0" Width="42" Visibility="Collapsed">
+					<!--添加按钮-->
+					<Grid>
+						<Rectangle Width="24" Height="2" Fill="{DynamicResource BtnHove}"/>
+						<Rectangle Width="2" Height="24" Fill="{DynamicResource BtnHove}"/>
+					</Grid>
+				</Button>
+			</StackPanel>
+			<!--cancel按钮-->
+		</Grid>
+		<ListBox Grid.Row="1" SelectionMode="Extended">
+			<ListBoxItem ContentTemplate="{DynamicResource ListCheckBoxTemplate}" Content="235245" IsSelected="True"/>
+			<ListBoxItem ContentTemplate="{DynamicResource ListCheckBoxTemplate}" Content="235245"/>
+			<ListBoxItem ContentTemplate="{DynamicResource ListCheckBoxTemplate}" Content="dg hnerg hwrtgh" IsSelected="True"/>
+			<ListBoxItem ContentTemplate="{DynamicResource ListCheckBoxTemplate}" Content="sryjw 4hw 4"/>
+			<ListBoxItem ContentTemplate="{DynamicResource ListCheckBoxTemplate}" Content="dsrty hjwr6yj w"/>
+		</ListBox>
+	</Grid>
+</UserControl>
