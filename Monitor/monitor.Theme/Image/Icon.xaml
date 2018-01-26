@@ -22,11 +22,11 @@
     <BitmapImage x:Key="Angle" UriSource="Angle.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Reset2" UriSource="Reset.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Reset" UriSource="ResetAll.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
-    <BitmapImage x:Key="Rotate" UriSource="Group_6.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="Rotate" UriSource="Rotate.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Pointer" UriSource="Pointer.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Zoom" UriSource="Zoom.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="PresetWindow" UriSource="Windowing.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
-    <BitmapImage x:Key="Rectangle" UriSource="Group_12.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="Rectangle" UriSource="Rectangle.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Ellipse" UriSource="Ellipse.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Calibration" UriSource="Calibration.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="FourPoints" UriSource="4points.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
@@ -36,6 +36,7 @@
     <BitmapImage x:Key="PresetWindow3" UriSource="ww_wl_pre3.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="PresetWindow4" UriSource="ww_wl_pre4.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="ResetWindow" UriSource="ww_wl_reset.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="Windowing" UriSource="Windowing.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Female" UriSource="Female.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="female_select" UriSource="female_select.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="Male" UriSource="Male.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
@@ -83,4 +84,10 @@
     <BitmapImage x:Key="tip_T" UriSource="tip_T.png" CreateOptions="IgnoreImageCache" CacheOption="OnLoad"/>
     <BitmapImage x:Key="Reset1" UriSource="Reset1.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
     <BitmapImage x:Key="round" UriSource="round.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+
+    <BitmapImage x:Key="load_in" UriSource="load_in.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="load_out" UriSource="load_out.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="load_in_active" UriSource="load_in_active.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+    <BitmapImage x:Key="load_out_active" UriSource="load_out_active.png" CreateOptions="IgnoreImageCache"  CacheOption="OnLoad"/>
+
 </ResourceDictionary>

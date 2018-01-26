@@ -249,6 +249,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Undo.png" />
+    <Resource Include="Image\load_in.png" />
+    <Resource Include="Image\load_in_active.png" />
+    <Resource Include="Image\load_out.png" />
+    <Resource Include="Image\load_out_active.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\zoom.png" />
